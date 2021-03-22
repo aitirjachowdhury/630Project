@@ -25,8 +25,8 @@
       <form class="" method="post" action="<?php echo $_SERVER['PHP_SELF'];?>" width="200px;">
         <label for="table"> Table: </label>
           <select name="table" >
-            <option value="CARS">Cars</option>
             <option value="noSel">No Selection</option>
+            <option value="CARS">Cars</option>
             <option value="FLOWERS">Flowers</option>
             <option value="COFFEE">Coffee</option>
             <option value="ITEMS">Items</option>
@@ -36,9 +36,9 @@
           </select>
         <label for="option"> Options: </label>
           <select name="option">
-            <option value="insert">INSERT</option>
             <option value="noSel">No Selection</option>
             <option value="view">VIEW</option>
+            <option value="insert">INSERT</option>
             <option value="delete">DELETE</option>
             <option value="update">UPDATE</option>
           </select>
