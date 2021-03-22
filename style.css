@@ -278,7 +278,7 @@ html {
         background-color: rgb(0,0,0); /* Fallback color */
         background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
       }
-      
+
       /* Modal Content */
       .modal-content {
         background-color: #fefefe;
@@ -288,7 +288,7 @@ html {
         border: 1px solid #888;
         width: 80%;
       }
-      
+
       /* The Close Button */
       .close {
         color: #aaaaaa;
@@ -296,7 +296,7 @@ html {
         font-size: 28px;
         font-weight: bold;
       }
-      
+
       .close:hover,
       .close:focus {
         color: #000;
@@ -312,12 +312,12 @@ html {
     height: 375px;
     width: 60%;
     margin: 20px auto;
-}    
+}
 
 .address{
   width: 40%;
   margin-bottom: 10px;
-  padding: 0px; 
+  padding: 0px;
   float:left;
 }
 
@@ -392,8 +392,6 @@ th:last-child{
 /*DB Maintain*/
 .selection{
   text-align: center;
-  padding-top: 80px;
-  width: 200px;
 }
 .insert{
   align-items: center;
@@ -403,20 +401,15 @@ th:last-child{
   align-items: center;
   padding: 10px;
   width: 145px;
-  border-radius: 5px;
   /*border: 2px solid rgb(252, 161, 128);*/
-  outline: none;
 }
 #insertForm{
   margin: 10px;
   text-align: center;
   padding: 10px;
   width: 125px;
-  border-radius: 5px;
   /*border: 2px solid rgb(252, 161, 128);*/
-  outline: none;
 }
 .viewTable{
   align-items: center;
 }
-

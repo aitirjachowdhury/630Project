@@ -77,7 +77,6 @@
 
            if (isset($_POST['select']))
            {
-             {
              //CAR TABLE VIEW
              if ($_POST['table'] === "CARS" && $_POST['option'] === "view"){
                $sql = "SELECT * FROM cars";
@@ -336,8 +335,6 @@
                 }
              }
 
-
-           }
               //INSERT VALUES INTO CARS TABLE
               elseif ($_POST['table'] === "CARS" && $_POST['option'] === "insert")
               {
@@ -376,6 +373,9 @@
                           catch (Exception $e) {
                               echo "<h2> ERROR: " . $e->getMessage() . "</h2>";
                           }
+                }
+                else {
+                  echo "string";
                 }
               }
             /*
