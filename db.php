@@ -61,8 +61,7 @@
 
         <input type="submit" name="insert" value="Insert Data">
       </form>
-    </div>
--->
+    </div>-->
 
     <div class="viewTable">
       <?php
@@ -340,7 +339,7 @@
               {
 
                 echo "<div>
-                  <form class='insert' method='post' action='" . $_SERVER['PHP_SELF'] . "'>
+                  <form class='insert' method='post' action='insert.php'>
 
                     <label for='model'> Model: </label>
                     <input type='text' name='model' id='insertForm'></input>
@@ -352,58 +351,142 @@
                     <input type='submit' name='insert' value='Insert Data'>
                   </form>
                 </div>";
-
-                if (isset($_POST['insert'])){
-
-                  $model = $POST_['model'];
-                  $imgs = $POST_['imgs'];
-                  $price = $POST_['price'];
-
-                  $sql = "INSERT INTO CARS (model, imgs, price)
-                          VALUES ('$model', '$imgs', '$price')";
-
-                          try {
-                            if($conn->query($sql) == TRUE){
-                              echo "<h2>New Record Created Successfully</h2>";
-                            }
-                            else {
-                              throw new Exception("Failed To Create Record");
-                            }
-                          }
-                          catch (Exception $e) {
-                              echo "<h2> ERROR: " . $e->getMessage() . "</h2>";
-                          }
-                }
-                else {
-                  echo "string";
-                }
               }
-            /*
+
               else if ($_POST['table'] === "FLOWERS" && $_POST['option'] === "insert"){
 
+                echo "<div>
+                  <form class='insert' method='post' action='insert_flower.php'>
 
+                    <label for='flowerid'> ID: </label>
+                    <input type='text' name='flowerid' id='insertForm'></input>
+                    <label for='flowerType'> Type: </label>
+                    <input type='text' name='flowerType' id='insertForm'></input>
+                    <label for='storeCode'> Store Code: </label>
+                    <input type='text' name='storeCode' id='insertForm'></input>
+                    <label for='img'> Image: </label>
+                    <input type='text' name='img' id='insertForm'></input>
+                    <label for='price'> Price: </label>
+                    <input type='text' name='price' id='insertForm'></input>
+
+                    <input type='submit' name='insert' value='Insert Data'>
+                  </form>
+                </div>";
               }
+
               else if ($_POST['table'] === "COFFEE" && $_POST['option'] === "insert"){
+                 echo "<div>
+                  <form class='insert' method='post' action='insert_coffee.php'>
 
+                    <label for='coffeeid'> ID: </label>
+                    <input type='text' name='coffeeid' id='insertForm'></input>
+                    <label for='coffeeType'> Type: </label>
+                    <input type='text' name='coffeeType' id='insertForm'></input>
+                    <label for='storeCode'> Store Code: </label>
+                    <input type='text' name='storeCode' id='insertForm'></input>
+                    <label for='img'> Image: </label>
+                    <input type='text' name='img' id='insertForm'></input>
+                    <label for='price'> Price: </label>
+                    <input type='text' name='price' id='insertForm'></input>
 
+                    <input type='submit' name='insert' value='Insert Data'>
+                  </form>
+                </div>";
               }
+
               else if ($_POST['table'] === "ITEMS" && $_POST['option'] === "insert"){
+                  echo "<div>
+                  <form class='insert' method='post' action='insert_items.php'>
 
+                    <label for='productid'> Product ID: </label>
+                    <input type='text' name='productid' id='insertForm'></input>
+                    <label for='userid'> User ID: </label>
+                    <input type='text' name='userid' id='insertForm'></input>
+                    <label for='src'> Source: </label>
+                    <input type='text' name='src' id='insertForm'></input>
+                    <label for='dest'> Destination: </label>
+                    <input type='text' name='dest' id='insertForm'></input>
+                    <label for='dist'> Distance: </label>
+                    <input type='text' name='dist' id='insertForm'></input>
+                    <label for='tm'> Time: </label>
+                    <input type='time' name='tm' id='insertForm'></input>
 
+                    <input type='submit' name='insert' value='Insert Data'>
+                  </form>
+                </div>"; 
               }
+
               else if ($_POST['table'] === "ORDERS" && $_POST['option'] === "insert"){
+                echo "<div>
+                  <form class='insert' method='post' action='insert_order.php'>
 
+                    <label for='orderid'> Order ID: </label>
+                    <input type='text' name='orderid' id='insertForm'></input>
+                    <label for='userid'> User ID: </label>
+                    <input type='text' name='userid' id='insertForm'></input>
+                    <label for='tripid'> Trip ID: </label>
+                    <input type='text' name='tripid' id='insertForm'></input>
+                    <label for='productid'> Product ID: </label>
+                    <input type='text' name='productid' id='insertForm'></input>
+                    <label for='date_issued'> Date: </label>
+                    <input type='date' name='date_issued' id='insertForm'></input>
+
+                    <input type='submit' name='insert' value='Insert Data'>
+                  </form>
+                </div>";
 
               }
+
               else if ($_POST['table'] === "TRIPS" && $_POST['option'] === "insert"){
+                echo "<div>
+                  <form class='insert' method='post' action='insert_trips.php'>
 
+                    <label for='userid'> User ID: </label>
+                    <input type='text' name='userid' id='insertForm'></input>
+                    <label for='carid'> Car ID: </label>
+                    <input type='text' name='carid' id='insertForm'></input>
+                    <label for='src'> Source: </label>
+                    <input type='text' name='src' id='insertForm'></input>
+                    <label for='dest'> Destination: </label>
+                    <input type='text' name='dest' id='insertForm'></input>
+                    <label for='dist'> Distance: </label>
+                    <input type='text' name='dist' id='insertForm'></input>
+                    <label for='price'> Price: </label>
+                    <input type='text' name='price' id='insertForm'></input>
+                    <label for='tm'> Time: </label>
+                    <input type='time' name='tm' id='insertForm'></input>
+
+                    <input type='submit' name='insert' value='Insert Data'>
+                  </form>
+                </div>"; 
 
               }
+
               else if ($_POST['table'] === "USERS" && $_POST['option'] === "insert"){
+                  echo "<div>
+                  <form class='insert' method='post' action='insert_users.php'>
 
+                    <label for='username'> Username: </label>
+                    <input type='text' name='username' id='insertForm'></input>
+                    <label for='pswrd'> Password: </label>
+                    <input type='text' name='pswrd' id='insertForm'></input>
+                    <label for='first_name'> First Name: </label>
+                    <input type='text' name='first_name' id='insertForm'></input>
+                    <label for='last_name'> Surname: </label>
+                    <input type='text' name='last_name' id='insertForm'></input>
+                    <label for='tel_no'> Tel. No: </label>
+                    <input type='text' name='tel_no' id='insertForm'></input>
+                    <label for='mail_addr'> Mailing Address: </label>
+                    <input type='text' name='mail_addr' id='insertForm'></input>
+                    <label for='email'> Email: </label>
+                    <input type='text' name='email' id='insertForm'></input>
+
+                    <input type='submit' name='insert' value='Insert Data'>
+                  </form>
+                </div>"; 
 
               }
-              */
+            
               else {
                 echo "string";
               }
