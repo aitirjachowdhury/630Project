@@ -486,7 +486,85 @@
                 </div>"; 
 
               }
-            
+
+              //DELETE Operation
+              else if ($_POST['table'] === "CARS" && $_POST['option'] === "delete"){
+                echo "<div>
+                <form class='insert' method='post' action='delete_car.php'>
+                    <label for='carid'> Car ID: </label>
+                    <input type='text' name='carid' id='insertForm'></input>
+
+                    <input type='submit' name='insert' value='Delete Data'>
+                </form>
+                </div>";
+              }
+
+              else if ($_POST['table'] === "FLOWERS" && $_POST['option'] === "delete"){
+                echo "<div>
+                <form class='insert' method='post' action='delete_flower.php'>
+                    <label for='flowerid'> Flower ID: </label>
+                    <input type='text' name='flowerid' id='insertForm'></input>
+
+                    <input type='submit' name='insert' value='Delete Data'>
+                </form>
+                </div>";
+              }
+
+              else if ($_POST['table'] === "COFFEE" && $_POST['option'] === "delete"){
+                echo "<div>
+                <form class='insert' method='post' action='delete_coffee.php'>
+                    <label for='coffeeid'> Coffee ID: </label>
+                    <input type='text' name='coffeeid' id='insertForm'></input>
+
+                    <input type='submit' name='insert' value='Delete Data'>
+                </form>
+                </div>";
+              }
+              
+              else if ($_POST['table'] === "ITEMS" && $_POST['option'] === "delete"){
+                echo "<div>
+                <form class='insert' method='post' action='delete_item.php'>
+                    <label for='productid'> Product ID: </label>
+                    <input type='text' name='productid' id='insertForm'></input>
+
+                    <input type='submit' name='insert' value='Delete Data'>
+                </form>
+                </div>";
+              }
+
+              else if ($_POST['table'] === "TRIPS" && $_POST['option'] === "delete"){
+                echo "<div>
+                <form class='insert' method='post' action='delete_trip.php'>
+                    <label for='tripid'> Trip ID: </label>
+                    <input type='text' name='tripid' id='insertForm'></input>
+
+                    <input type='submit' name='insert' value='Delete Data'>
+                </form>
+                </div>";
+              }
+
+              else if ($_POST['table'] === "ORDERS" && $_POST['option'] === "delete"){
+                echo "<div>
+                <form class='insert' method='post' action='delete_order.php'>
+                    <label for='orderid'> Order ID: </label>
+                    <input type='text' name='orderid' id='insertForm'></input>
+
+                    <input type='submit' name='insert' value='Delete Data'>
+                </form>
+                </div>";
+              }
+
+              else if ($_POST['table'] === "USERS" && $_POST['option'] === "delete"){
+                echo "<div>
+                <form class='insert' method='post' action='delete_user.php'>
+                    <label for='userid'> User ID: </label>
+                    <input type='text' name='userid' id='insertForm'></input>
+
+                    <input type='submit' name='insert' value='Delete Data'>
+                </form>
+                </div>";
+              }
+              
               else {
                 echo "string";
               }
