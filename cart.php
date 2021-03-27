@@ -57,36 +57,49 @@ session_start();
       {
         $iuserid = (int) $_SESSION['userid'];
         
-          # TO READ DATA
-          $sql = "SELECT carid, src, dest, dist, price FROM TRIPS WHERE userid = $iuserid";
-          $result = mysqli_query($conn, $sql);
-          if(mysqli_num_rows($result) > 0){
-            while($row = mysqli_fetch_assoc($result)){
-              $datas[] = $row;
-            }
-          }
+        // TO CREATE TABLE
+        $sql = "CREATE TABLE TRIPS (
+          TRIPID int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+          USERID INT NOT NULL,
+          CARID INT NOT NULL,
+          SRC VARCHAR(50) NOT NULL,
+          DEST VARCHAR(50) NOT NULL,
+          DIST VARCHAR(5) NOT NULL,
+          PRICE VARCHAR(5) NOT NULL,
+          TM TIME NOT NULL
+          )";
 
-        # TO PRINT
-        if(count($datas) != 0){
-          $_SESSION['total'] =0;
-          $html = "";
-          foreach($datas as $row) {
-            $icarid = (int) $row['carid'];
-            $sql = "SELECT model, imgs, price FROM CARS WHERE carid = $icarid";
+    if($conn->query($sql) === TRUE){}
 
-            $result = $conn->query($sql);
+    # TO READ DATA
+    $sql = "SELECT carid, src, dest, dist, price FROM TRIPS WHERE userid = $iuserid";
+    $result = mysqli_query($conn, $sql);
+    if(mysqli_num_rows($result) > 0){
+      while($row = mysqli_fetch_assoc($result)){
+      $datas[] = $row;}
+    }
 
-            if ($result->num_rows > 0) {
-              $row2 = $result->fetch_assoc();
-            $html .= " <tr>
-            <td>
-                <div class=\"cart-info\">
-                <img src=\"".$row2["imgs"]."\">
-                <div>
-                <p>".$row2["model"]."</p>
-                <small>Price per km: $".$row2["price"]."</small>
-                </div>
-                </div>
+    # TO PRINT
+    if(count($datas) != 0){
+      $_SESSION['total'] =0;
+      $html = "";
+      foreach($datas as $row) {
+        $icarid = (int) $row['carid'];
+        $sql = "SELECT model, imgs, price FROM CARS WHERE carid = $icarid";
+
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+          $row2 = $result->fetch_assoc();
+          $html .= " <tr>
+          <td>
+            <div class=\"cart-info\">
+            <img src=\"".$row2["imgs"]."\">
+            <div>
+            <p>".$row2["model"]."</p>
+            <small>Price per km: $".$row2["price"]."</small>
+            </div>
+            </div>
             </td>
             <td>".$row["src"]."</td>
             <td>".$row["dest"]."</td>
@@ -94,24 +107,31 @@ session_start();
             <td>$".$row["price"]."</td> </tr>
             ";}
             
-            $_SESSION['total'] += $row["price"];
-
-          }
-          echo $html;
-        }
+            $_SESSION['total'] += $row["price"];}
+          echo $html;}
 
         $datas = array();
 
-          # TO READ DATA
-          $sql = "SELECT * FROM ITEMS WHERE userid = $iuserid";
+      // TO CREATE TABLE
+      $sql = "CREATE TABLE ITEMS (
+      PRODUCTID VARCHAR(4) PRIMARY KEY NOT NULL,
+      USERID INT NOT NULL,
+      SRC VARCHAR(50) NOT NULL,
+      DEST VARCHAR(50) NOT NULL,
+      DIST VARCHAR(5) NOT NULL,
+      TM TIME NOT NULL)";
+            
+      if($conn->query($sql) === TRUE){}
+          
+      # TO READ DATA
+        $sql = "SELECT * FROM ITEMS WHERE userid = $iuserid";
 
-          $result = mysqli_query($conn, $sql);
+        $result = mysqli_query($conn, $sql);
 
-          if(mysqli_num_rows($result) > 0){
-            while($row = mysqli_fetch_assoc($result)){
-              $datas[] = $row;
-            }
-          }
+        if(mysqli_num_rows($result) > 0){
+          while($row = mysqli_fetch_assoc($result)){
+            $datas[] = $row;}
+        }
 
         # TO PRINT
         if(count($datas) != 0){
@@ -144,9 +164,7 @@ session_start();
 
           }
           echo $html;    
-            }
-         
-      
+      }
     }
       else {echo "<script>alert('Please Login to see items in cart!');window.location.href = \"signin.php\";</script>" ;}
 
@@ -263,7 +281,7 @@ session_start();
                   $row = $result->fetch_assoc();
                   $iorderid = $row["orderid"];
                 }
-
+                $_SESSION['total'] = 0;
                 echo "<script>alert('Order Successful with Order ID: ".$iorderid."');window.location.href = \"index.php\";</script>" ;
               } else {
                 throw new Exception("Something went wrong! Try again later.");

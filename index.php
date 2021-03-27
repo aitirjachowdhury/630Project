@@ -68,6 +68,45 @@ session_start();
 
           if ($conn->connect_error) {die("Connection failed: " . $conn->connect_error);}
 
+        // TO CREATE TABLE
+        $sql = "CREATE TABLE CARS (
+          carid int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+          model VARCHAR(20) NOT NULL,
+          imgs VARCHAR(30) NOT NULL,
+          price VARCHAR(5) NOT NULL,
+          available BIT DEFAULT 1
+          )";
+
+    if($conn->query($sql) === TRUE){
+      $sql = "INSERT INTO cars (model, imgs, price)  
+      VALUES('Starex Minivan', 'imgs/StarexMinivan.png', '2.05'), 
+            ('Red Audi 2008', 'imgs/Audi.png', '1.35'), 
+            ('Honda 2004', 'imgs/2004.png', '0.95'), 
+            ('Honda Odyssey', 'imgs/Odyssey.png', '1.35'), 
+            ('Ford', 'imgs/Ford.png', '1.50'), 
+            ('Honda CRV', 'imgs/CRV.png', '1.80'), 
+            ('Honda Jazz', 'imgs/Jazz.png', '1.05') "; 
+      if ($conn->query($sql) === true) {}
+    }
+
+    $sql = "CREATE TABLE flower(
+      flowerid VARCHAR(4) PRIMARY KEY NOT NULL,
+      flowerType VARCHAR(30) NOT NULL,
+      storeCode VARCHAR(20) NOT NULL,
+      img VARCHAR(30) NOT NULL,
+      price VARCHAR(5) NOT NULL
+    )";
+
+  if($conn->query($sql) === TRUE){
+
+  $sql = "INSERT INTO flower(flowerid, flowerType, storeCode, img, price)
+  VALUES ('f1', 'Colorful Bouquet', 'a1', 'imgs/flowers.png', '10.00'),
+        ('f2', 'White Lilies', 'b2', 'imgs/lilies.png', '13.00'),
+        ('f3', 'Assorted Yellows', 'c3', 'imgs/yellowF.png', '13.00'),
+        ('f4', 'Flower Crown (Full)', 'd4', 'imgs/crown3.jpg', '15.00'),
+        ('f5', 'Flower Crown (Half)', 'e5', 'imgs/crown1.jpg', '7.50')";
+  if ($conn->query($sql) === true) {}
+  }
           $iorderid = $_POST["orderid"];
           $iuserid = (int) $_SESSION['userid'];
             try {
@@ -75,6 +114,10 @@ session_start();
               $result = mysqli_query($conn, $sql);
               if(mysqli_num_rows($result) > 0){
                 $row = $result->fetch_assoc();
+
+                if($row["productid"] === ""){
+                  $row["productid"] = "-";
+                }
 
                 echo "<script>
                 var textb = document.getElementById(\"searchresult\");
@@ -93,10 +136,6 @@ session_start();
       else {echo "<script>alert('Please Login!')</script>" ;}
     }
   }
-
-    ?>   
-    
-    
-
+  ?>
   </body>
 </html>
