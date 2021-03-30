@@ -11,15 +11,22 @@
     <div class="topnav">
       <h3>P2S</h3>
       <div class="option">
-      <a href="index.php">Home</a>
-      <a href="about.html">About Us</a>
-      <a href="contact.html">Contact Us</a>
-      <a href="reviews.html">Reviews</a>
-      <a href="cart.php">Shopping Cart</a>
-      <a href="db.php" class="active">DB Maintain</a>
-      <a href="signin.php">Sign-in</a>
+      <a href="signin.php">Log Out</a>
       </div>
     </div>
+
+    <div class="sidenav">
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Clients</a>
+    <a href="#">Contact</a>
+  </div>
+
+    <div class="main">
+      <br><br><br>
+      <h1 style="text-align: center;">Database Maintenance</h1>
+    </div>
+
 
     <div class="selection" id="topForm">
       <form class="" method="post" action="<?php echo $_SERVER['PHP_SELF'];?>" width="200px;">
@@ -413,7 +420,7 @@
 
                     <input type='submit' name='insert' value='Insert Data'>
                   </form>
-                </div>"; 
+                </div>";
               }
 
               else if ($_POST['table'] === "ORDERS" && $_POST['option'] === "insert"){
@@ -458,7 +465,7 @@
 
                     <input type='submit' name='insert' value='Insert Data'>
                   </form>
-                </div>"; 
+                </div>";
 
               }
 
@@ -483,7 +490,7 @@
 
                     <input type='submit' name='insert' value='Insert Data'>
                   </form>
-                </div>"; 
+                </div>";
 
               }
 
@@ -520,7 +527,7 @@
                 </form>
                 </div>";
               }
-              
+
               else if ($_POST['table'] === "ITEMS" && $_POST['option'] === "delete"){
                 echo "<div>
                 <form class='insert' method='post' action='delete_item.php'>
@@ -564,7 +571,7 @@
                 </form>
                 </div>";
               }
-              
+
               else {
                 echo "string";
               }

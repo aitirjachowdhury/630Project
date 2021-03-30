@@ -21,7 +21,6 @@ session_start();
       <a href="contact.html">Contact Us</a>
       <a href="reviews.html">Reviews</a>
       <a href="cart.php">Shopping Cart</a>
-      <a href="db.php">DB Maintain</a>
       <a href="signin.php">Sign-in</a>
       </div>
     </div>
@@ -75,11 +74,11 @@ session_start();
       $username = "root";
       $pswrd = "";
       $dbname = "services";
-      
+
       $conn = new mysqli($servername, $username, $pswrd, $dbname);
-      
+
       if ($conn->connect_error) {die("Connection failed: " . $conn->connect_error);}
- 
+
         // TO CREATE TABLE
         $sql = "CREATE TABLE CARS (
           carid int PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -90,14 +89,14 @@ session_start();
           )";
 
     if($conn->query($sql) === TRUE){
-      $sql = "INSERT INTO cars (model, imgs, price)  
-      VALUES('Starex Minivan', 'imgs/StarexMinivan.png', '2.05'), 
-            ('Red Audi 2008', 'imgs/Audi.png', '1.35'), 
-            ('Honda 2004', 'imgs/2004.png', '0.95'), 
-            ('Honda Odyssey', 'imgs/Odyssey.png', '1.35'), 
-            ('Ford', 'imgs/Ford.png', '1.50'), 
-            ('Honda CRV', 'imgs/CRV.png', '1.80'), 
-            ('Honda Jazz', 'imgs/Jazz.png', '1.05') "; 
+      $sql = "INSERT INTO cars (model, imgs, price)
+      VALUES('Starex Minivan', 'imgs/StarexMinivan.png', '2.05'),
+            ('Red Audi 2008', 'imgs/Audi.png', '1.35'),
+            ('Honda 2004', 'imgs/2004.png', '0.95'),
+            ('Honda Odyssey', 'imgs/Odyssey.png', '1.35'),
+            ('Ford', 'imgs/Ford.png', '1.50'),
+            ('Honda CRV', 'imgs/CRV.png', '1.80'),
+            ('Honda Jazz', 'imgs/Jazz.png', '1.05') ";
       if ($conn->query($sql) === true) {}
     }
 
@@ -125,7 +124,7 @@ session_start();
           </div>";}
           echo $html;
         }
-      
+
         $conn -> close();
 
         ?>
@@ -264,11 +263,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST" )
       $username = "root";
       $pswrd = "";
       $dbname = "services";
-      
+
       $conn = new mysqli($servername, $username, $pswrd, $dbname);
-      
+
       if ($conn->connect_error) {die("Connection failed: " . $conn->connect_error);}
-      
+
 
         // TO CREATE TABLE
         $sql = "CREATE TABLE TRIPS (
@@ -290,7 +289,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" )
     $dest = $_POST['destaddr'];
     $dist = $_POST['distance'];
     $price = ((float) $_POST['price']) * $check;
-    $price2 = round($price, 2); 
+    $price2 = round($price, 2);
     $tm = $_POST['time'];
     $sql = "INSERT INTO TRIPS (USERID, CARID, SRC, DEST, DIST, PRICE, TM) VALUES ('$uid', '$cid', '$src', '$dest', '$dist', '$price2', '$tm')";
 

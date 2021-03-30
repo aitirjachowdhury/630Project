@@ -10,19 +10,17 @@ session_start();
     <title>P2S</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
   </head>
   <body>
-
     <div class="topnav">
       <h3>P2S</h3>
       <div class="option">
-      <a class="active" href="index.php">Home</a>
+      <a class="active" href="#">Home</a>
       <a href="about.html">About Us</a>
       <a href="contact.html">Contact Us</a>
       <a href="reviews.html">Reviews</a>
       <a href="cart.php">Shopping Cart</a>
+      <a href="db.php">DB Maintain</a>
       <a href="signin.php">Sign-in</a>
       </div>
     </div>

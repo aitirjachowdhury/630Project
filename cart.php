@@ -20,7 +20,6 @@ session_start();
       <a href="contact.html">Contact Us</a>
       <a href="reviews.html">Reviews</a>
       <a class="active" href="cart.php">Shopping Cart</a>
-      <a href="db.php">DB Maintain</a>
       <a href="signin.php">Sign-in</a>
       </div>
     </div>
@@ -46,17 +45,17 @@ session_start();
       $username = "root";
       $pswrd = "";
       $dbname = "services";
-      
+
       $conn = new mysqli($servername, $username, $pswrd, $dbname);
-      
+
       if ($conn->connect_error) {die("Connection failed: " . $conn->connect_error);}
- 
+
       $datas = array();
-      
+
       if(isset($_SESSION['userid']))
       {
         $iuserid = (int) $_SESSION['userid'];
-        
+
         // TO CREATE TABLE
         $sql = "CREATE TABLE TRIPS (
           TRIPID int PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -106,7 +105,7 @@ session_start();
             <td>".round($row["dist"],2)." km</td>
             <td>$".$row["price"]."</td> </tr>
             ";}
-            
+
             $_SESSION['total'] += $row["price"];}
           echo $html;}
 
@@ -120,9 +119,9 @@ session_start();
       DEST VARCHAR(50) NOT NULL,
       DIST VARCHAR(5) NOT NULL,
       TM TIME NOT NULL)";
-            
+
       if($conn->query($sql) === TRUE){}
-          
+
       # TO READ DATA
         $sql = "SELECT * FROM ITEMS WHERE userid = $iuserid";
 
@@ -159,11 +158,11 @@ session_start();
             <td>".round($row["DIST"],2)." km</td>
             <td>$".$row2["price"]."</td> </tr>
             ";}
-            
+
             $_SESSION['total'] += $row2["price"];
 
           }
-          echo $html;    
+          echo $html;
       }
     }
       else {echo "<script>alert('Please Login to see items in cart!');window.location.href = \"signin.php\";</script>" ;}
@@ -171,44 +170,44 @@ session_start();
         $conn -> close();
 
         ?>
-        </table>   
+        </table>
 
         <div class="total-price">
             <table>
                 <tr>
                     <td>Subtotal</td>
-                    <td> 
-                    <?php 
+                    <td>
+                    <?php
                     if(isset($_SESSION['total']))
                     {
-                      echo("$".$_SESSION['total']); 
+                      echo("$".$_SESSION['total']);
                     }
                     else{
                       echo("$0.00");
                     }
-                    ?>  
+                    ?>
                    </td>
                 </tr>
                 <tr>
                     <td>Tax</td>
                     <td>
-                    <?php 
+                    <?php
                     if(isset($_SESSION['total']))
                     {
-                      echo("$".round($_SESSION['total']*0.13,2)); 
+                      echo("$".round($_SESSION['total']*0.13,2));
                     }
                     else{
                       echo("$0.00");
                     }
-                    ?>  
+                    ?>
                     </td>
                 </tr>
                 <tr>
                     <td>Total</td>
-                    <td>                    <?php 
+                    <td>                    <?php
                     if(isset($_SESSION['total']))
                     {
-                      echo("$".round($_SESSION['total']*1.13,2)); 
+                      echo("$".round($_SESSION['total']*1.13,2));
                     }
                     else{
                       echo("$0.00");
@@ -218,13 +217,13 @@ session_start();
             </table>        </div>
       </div>
 
-      <form id="distance_form" method="post"> 
+      <form id="distance_form" method="post">
       <button type="submit" name="checkout"> Checkout </button>
       </form>
 
       <?php
         if($_SERVER["REQUEST_METHOD"] == "POST" )
-        { 
+        {
           $iuserid = (int) $_SESSION['userid'];
           $servername = "localhost";
           $username = "root";
@@ -232,7 +231,7 @@ session_start();
           $dbname = "services";
 
           $conn = new mysqli($servername, $username, $pswrd, $dbname);
-          
+
 
           if ($conn->connect_error) {die("Connection failed: " . $conn->connect_error);}
 
@@ -246,7 +245,7 @@ session_start();
                 )";
 
             if($conn->query($sql) === TRUE){}
-          
+
           $itripid;
           $iproductid;
 
@@ -258,8 +257,8 @@ session_start();
               $row = $result->fetch_assoc();
               $itripid = $row["TRIPID"];
             }
-          
-          
+
+
             $sql = "SELECT PRODUCTID FROM ITEMS WHERE USERID = $iuserid";
 
             $result = $conn->query($sql);
@@ -268,8 +267,8 @@ session_start();
               $row = $result->fetch_assoc();
               $iproductid = $row["PRODUCTID"];
             }
-          
-          
+
+
             $sql = "INSERT INTO ORDERS (userid, tripid, productid) VALUES ('$iuserid', '$itripid', '$iproductid')";
 
             try {
@@ -290,7 +289,7 @@ session_start();
                 echo "<h2> ERROR: " . $e->getMessage() . "</h2>";
           }
           $conn->close();
-          
+
           }
         ?>
     </body>

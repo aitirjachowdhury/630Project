@@ -1,3 +1,23 @@
+<?php
+  if (isset($_POST['uname']) && isset($_POST['password']) && isset($_POST['member'])) {
+    function test_input($data) {
+  	  $data = trim($data);
+  	  $data = stripslashes($data);
+  	  $data = htmlspecialchars($data);
+  	  return $data;
+  	}
+    $username = test_input($_POST['uname']);
+  	$password = test_input($_POST['password']);
+  	$member = test_input($_POST['member']);
+
+    if (empty($username)) {
+      header("Location: index.php?Username is Required");
+    }
+  }
+  else {
+    hader("Location: index.php");
+  }
+ ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>

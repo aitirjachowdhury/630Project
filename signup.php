@@ -94,7 +94,6 @@
       <a href="contact.html">Contact Us</a>
       <a href="reviews.html">Reviews</a>
       <a href="#news">Shopping Cart</a>
-      <a href="db.php">DB Maintain</a>
       <a class="active" href="signin.php">Sign-in</a>
       </div>
     </div>

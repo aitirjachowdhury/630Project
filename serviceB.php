@@ -22,7 +22,6 @@ session_start();
       <a href="contact.html">Contact Us</a>
       <a href="reviews.html">Reviews</a>
       <a href="cart.php">Shopping Cart</a>
-      <a href="db.php">DB Maintain</a>
       <a href="signin.php">Sign-in</a>
       </div>
     </div>

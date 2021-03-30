@@ -21,6 +21,7 @@ session_start();
       <a href="contact.html">Contact Us</a>
       <a href="reviews.html">Reviews</a>
       <a href="cart.php">Shopping Cart</a>
+      <a href="db.php">DB Maintain</a>
       <a class="active" href="signin.php">Sign-in</a>
       </div>
     </div>
@@ -31,26 +32,11 @@ session_start();
         <div class="smaller-container">
           <form action="check-login.php" method="post">
             <div class="si-container">
-
               <label for="uname"><b>Username</b></label>
-              <input type="text"
-                     placeholder="Enter Username"
-                     name="uname"
-                     required>
+              <input type="text" placeholder="Enter Username" name="uname" required>
 
               <label for="psw"><b>Password</b></label>
-              <input type="password"
-                     name="psw"
-                     required>
-
-              <label for="memType"><b>Select Type</b></label>
-              <select class="member"
-                      name="member">
-                <option selected value="user">User</option>
-                <option value="admin">Admin</option>
-              </select>
-
-              <br> <br>
+              <input type="password" name="psw" required>
 
               <button type="submit">Sign In</button>
               <button type="button" onclick="window.location.href='signup.php';">Sign Up</button>
@@ -67,7 +53,6 @@ session_start();
 
                 $uname = strtolower(trim($_POST["uname"]));
                 $psw = trim($_POST["psw"]);
-                $admin = "admin";
 
                 $servername = "localhost";
                 $username = "root";
@@ -86,15 +71,12 @@ session_start();
                   $result = $conn->query($sql);
 
                   if ($result->num_rows > 0) {
-                    if ($row["USERNAME"] == $admin && $row["PSWRD"] == $psw){
-                      $_SESSION['loggedin'] = true;
-                      $_SESSION['userid'] = $row["USERID"];
-                      header("location: db.php");
-                    }
-                    elseif($row["PSWRD"] == $psw){
-                      $_SESSION['loggedin'] = true;
-                      $_SESSION['userid'] = $row["USERID"];
-                      header("location: index.php");
+                    $row = $result->fetch_assoc();
+                    if($row["PSWRD"] == $psw){
+
+                    $_SESSION['loggedin'] = true;
+                    $_SESSION['userid'] = $row["USERID"];
+                    header("location: index.php");
                     }
                     else{
                       echo '<script>alert("Incorrect password.")</script>';
