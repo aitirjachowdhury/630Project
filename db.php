@@ -571,15 +571,140 @@
                 </form>
                 </div>";
               }
-
-              else {
-                echo "string";
+              //UPDATE Operation
+              else if ($_POST['table'] === "CARS" && $_POST['option'] === "update"){
+                echo "<div>
+                <form method='post' action='update_car.php'>
+                    <label for='carid'> Car ID: </label>
+                    <input type='text' name='carid' id='insertForm'></input>
+                    <select name='cars' style='width:200px;'>
+                      <option value='price'>Price</option>
+                      <option value='model'>Model</option>
+                      <option value='available'>Availability</option>
+                    </select>
+                    <label for='val' style='margin-left: 15px;'> Value: </label>
+                    <input type='text' name='val' id='insertForm'></input>
+                    <input type='submit' name='update' value='Update Data'>
+                </form>
+                </div>";
               }
 
+              else if ($_POST['table'] === "FLOWERS" && $_POST['option'] === "update"){
+                echo "<div>
+                <form method='post' action='update_flower.php'>
+                <label for='flowerid'> Flower ID: </label>
+                <input type='text' name='flowerid' id='insertForm'></input>
+                <select name='flowers' style='width:200px;'>
+                <option value='price'>Price</option>
+                <option value='flowerType'>Flower Type</option>
+                <option value='storeCode'>Store Code</option>
+                </select>
+                <label for='val' style='margin-left: 15px;'> Value: </label>
+                <input type='text' name='val' id='insertForm'></input>
+                <input type='submit' name='update' value='Update Data'>
+                </form>
+                </div>";
+              }
+
+              else if ($_POST['table'] === "COFFEE" && $_POST['option'] === "update"){
+                echo "<div>
+                <form method='post' action='update_coffee.php'>
+                <label for='coffeeid'> Coffee ID: </label>
+                <input type='text' name='coffeeid' id='insertForm'></input>
+                <select name='coffee' style='width:200px;'>
+                <option value='price'>Price</option>
+                <option value='coffeeType'>Coffee Type</option>
+                <option value='storeCode'>Store Code</option>
+                </select>
+                <label for='val' style='margin-left: 15px;'> Value: </label>
+                <input type='text' name='val' id='insertForm'></input>
+                <input type='submit' name='update' value='Update Data'>
+                </form>
+                </div>";
+              }
+              
+              else if ($_POST['table'] === "ITEMS" && $_POST['option'] === "update"){
+                echo "<div>
+                <form method='post' action='update_item.php'>
+                <label for='productid'> Product ID: </label>
+                <input type='text' name='productid' id='insertForm'></input>
+                <select name='items' style='width:200px;'>
+                <option value='SRC'>Source</option>
+                <option value='DEST'>Destination</option>
+                <option value='DIST'>Distance</option>
+                <option value='TM'>Time</option>
+                <option value='USERID'>User ID</option>
+                </select>
+                <label for='val' style='margin-left: 15px;'> Value: </label>
+                <input type='text' name='val' id='insertForm'></input>
+                <input type='submit' name='update' value='Update Data'>
+                </form>
+                </div>";
+              }
+
+              else if ($_POST['table'] === "TRIPS" && $_POST['option'] === "update"){
+                echo "<div>
+                <form method='post' action='update_trip.php'>
+                <label for= tripid'> Trip ID: </label>
+                <input type='text' name='tripid' id='insertForm'></input>
+                <select name='trips' style='width:200px;'>
+                <option value='CARID'>Car ID</option>
+                <option value='SRC'>Source</option>
+                <option value='DEST'>Destination</option>
+                <option value='DIST'>Distance</option>
+                <option value='TM'>Time</option>
+                <option value='USERID'>User ID</option>
+                </select>
+                <label for='val'> Value: </label>
+                <input type='text' name='val' id='insertForm'></input>
+                <input type='submit' name='update' value='Update Data'>
+                </form>
+                </div>";
+              }
+
+              else if ($_POST['table'] === "ORDERS" && $_POST['option'] === "update"){
+                echo "<div>
+                <form method='post' action='update_order.php'>
+                <label for='orderid'> Order ID: </label>
+                <input type='text' name='orderid' id='insertForm'></input>
+                <select name='orders' style='width:200px;'>
+                <option value='productid'>Product ID</option>
+                <option value='tripid'>Trip ID</option>
+                <option value='userid'>User ID</option>              
+                <option value='date_issued'>Date Issued</option>
+                </select>
+                <label for='val'> Value: </label>
+                <input type='text' name='val' id='insertForm'></input>
+                <input type='submit' name='update' value='Update Data'>
+                </form>
+                </div>";
+              }
+
+              else if ($_POST['table'] === "USERS" && $_POST['option'] === "update"){
+                echo "<div>
+                <form method='post' action='update_user.php'>
+                <label for='userid'> User ID: </label>
+                <input type='text' name='userid' id='insertForm'></input>
+                <select name='user' style='width:200px;'>
+                <option value='BALANCE'>Balance</option>
+                <option value='USERNAME'>Username</option>
+                <option value='PSWRD'>Password</option>
+                <option value='FIRST_NAME'>First Name</option>
+                <option value='LAST_NAME'>Last Name</option>
+                <option value='TEL_NO'>Phone Number</option>
+                <option value='MAIL_ADDR'>Mail Address</option>
+                <option value='EMAIL'>Email</option>                
+                </select>
+                <label for='val'> Value: </label>
+                <input type='text' name='val' id='insertForm'></input>
+                <input type='submit' name='update' value='Update Data'>
+                </form>
+                </div>";
+              }
+              else {
+                echo "Invalid Selection";
+              }
            }//end of isset statement
-
-
-
         $conn -> close();
        ?>
 
