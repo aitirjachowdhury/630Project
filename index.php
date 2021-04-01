@@ -26,7 +26,7 @@ session_start();
       <a href="signin.php">Sign-in</a>
       </div>
     </div>
-    <br><br>
+    <br>
     <form id="distance_form" method="post">
       <input style="position: fixed; width: 20%; margin: 10px;" type="number" name="orderid" placeholder="Search Order ID..">
     </form>
@@ -41,6 +41,21 @@ session_start();
       <button class="service2" onclick="window.location.href='serviceB.php';">Ride & Deliver an item from a store</button>
     </div>
 
+    <?php
+    function brdetect( )
+      {
+          $res = $_SERVER['HTTP_USER_AGENT'];
+          if ( strpos ($res, "Chrome") == true)
+            echo "<h2 class='viewTable'>Browser Info: Google Chrome</h2>";
+          else if ( strpos ($res, "Firefox") == true)
+            echo "<h2 class='viewTable'> Browser Info: Firefox</h2>";
+          else if ( strpos ($res, "Trident") == true)
+            echo "<h2 class='viewTable'>Browser Info: Internet Explorer</h2>";
+          else  echo "Browser: unkown";
+      }
+      brdetect( );
+    ?>
+    
     <div id="searchresult"></div>
 
     <script>
