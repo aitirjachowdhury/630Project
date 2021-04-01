@@ -450,7 +450,6 @@ th:last-child{
 }
 
 /*DB Maintain*/
-
 .selection{
   display: block;
   width: 20%;
@@ -459,9 +458,7 @@ th:last-child{
 }
 
 #topForm{
-  padding-left: 100px;
   align-items: center;
-  /*border: 2px solid rgb(252, 161, 128);*/
 }
 
 #topForm input[type="submit"]{
@@ -473,7 +470,6 @@ th:last-child{
   margin: 15px;
   text-align: center;
   width: 125px;
-  /*border: 2px solid rgb(252, 161, 128);*/
 }
 .viewTable{
   text-align: center;

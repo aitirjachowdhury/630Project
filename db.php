@@ -22,11 +22,9 @@
     <a href="#">Contact</a>
   </div>
 
-
     <div class="main">
       <br><br><br>
       <h1 style="text-align: center;">Database Maintenance</h1>
-
 
     <div class="selection" id="topForm">
       <form class="" method="post" action="<?php echo $_SERVER['PHP_SELF'];?>" width="200px;">
@@ -50,25 +48,8 @@
             <option value="update">UPDATE</option>
           </select>
           <input class="select" name="select" type="submit" value="Make Selection">
-          <!-- <button type="select" name="select" style="width: 200px" onclick="hello()">
-          Make Selection </button> -->
       </form>
     </div>
-
-<!--
-    <div class="selection" >
-      <form class="insert" method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
-
-        <label for="model">Model: </label>
-        <input type="text" name="model"id="insertForm"></input>
-        <label for="imgs">Image: </label>
-        <input type="text" name="imgs"id="insertForm"></input>
-        <label for="price">Price: </label>
-        <input type="text" name="price"id="insertForm"></input>
-
-        <input type="submit" name="insert" value="Insert Data">
-      </form>
-    </div>-->
 
     <div class="viewTable">
       <?php
@@ -116,7 +97,6 @@
                catch (Exception $e) {
                  echo "<h2> ERROR: " . $e->getMessage() . "</h2>";
                }
-             //}
              }
 
              //FLOWER TABLE VIEW
