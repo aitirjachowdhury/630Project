@@ -26,20 +26,6 @@ session_start();
       <a href="signin.php">Sign-in</a>
       </div>
     </div>
-    <div class="navbar">
-      <a href="#home">Home</a>
-      <a href="#news">News</a>
-      <div class="dropdown">
-        <select class="dropbtn">Dropdown
-          <i class="fa fa-caret-down"></i>
-          <div class="dropdown-content">
-            <option value=""> <a href="#">Link 1</a></option>
-            <option value=""> <a href="#">Link 1</a></option>
-            <option value=""> <a href="#">Link 1</a></option>
-          </div>
-        </select>
-      </div>
-    </div>
     <br><br>
     <form id="distance_form" method="post">
       <input style="position: fixed; width: 20%; margin: 10px;" type="number" name="orderid" placeholder="Search Order ID..">
