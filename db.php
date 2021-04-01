@@ -22,10 +22,10 @@
     <a href="#">Contact</a>
   </div>
 
+
     <div class="main">
       <br><br><br>
       <h1 style="text-align: center;">Database Maintenance</h1>
-    </div>
 
 
     <div class="selection" id="topForm">
@@ -622,7 +622,7 @@
                 </form>
                 </div>";
               }
-              
+
               else if ($_POST['table'] === "ITEMS" && $_POST['option'] === "update"){
                 echo "<div>
                 <form method='post' action='update_item.php'>
@@ -670,7 +670,7 @@
                 <select name='orders' style='width:200px;'>
                 <option value='productid'>Product ID</option>
                 <option value='tripid'>Trip ID</option>
-                <option value='userid'>User ID</option>              
+                <option value='userid'>User ID</option>
                 <option value='date_issued'>Date Issued</option>
                 </select>
                 <label for='val'> Value: </label>
@@ -693,7 +693,7 @@
                 <option value='LAST_NAME'>Last Name</option>
                 <option value='TEL_NO'>Phone Number</option>
                 <option value='MAIL_ADDR'>Mail Address</option>
-                <option value='EMAIL'>Email</option>                
+                <option value='EMAIL'>Email</option>
                 </select>
                 <label for='val'> Value: </label>
                 <input type='text' name='val' id='insertForm'></input>
@@ -711,6 +711,7 @@
 </form>
     </div>
 
+    </div>
 
   </body>
 </html>

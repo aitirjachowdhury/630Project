@@ -11,13 +11,21 @@
   	$member = test_input($_POST['member']);
 
     if (empty($username)) {
-      header("Location: index.php?Username is Required");
+      header("Location: index.php?error=Username is Required");
+    }
+    elseif (empty($password)) {
+      header("Location: index.php?error=Password is Required");
+    }
+    else {
+      echo "Cool!";
     }
   }
   else {
     hader("Location: index.php");
   }
  ?>
+
+<!--
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -69,3 +77,4 @@
       ?>
   </body>
 </html>
+-->

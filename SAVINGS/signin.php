@@ -30,7 +30,7 @@ session_start();
       <h1 class="title">SIGN IN</h1>
       <div class="underline"></div>
         <div class="smaller-container">
-          <form action="check-login.php" method="post">
+          <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="si-container">
               <label for="uname"><b>Username</b></label>
               <input type="text" placeholder="Enter Username" name="uname" required>
@@ -58,15 +58,15 @@ session_start();
                 $username = "root";
                 $pswrd = "";
                 $dbname = "services";
-
+      
                 $conn = new mysqli($servername, $username, $pswrd, $dbname);
-
+      
                 if ($conn->connect_error) {
                       die("Connection failed: " . $conn->connect_error);
                 }
-
-                $sql = "SELECT USERID, PSWRD FROM users WHERE USERNAME = '$uname'";
-
+                  
+                $sql = "SELECT USERID, PSWRD FROM users WHERE USERNAME = '$uname'";      
+                      
                 try {
                   $result = $conn->query($sql);
 

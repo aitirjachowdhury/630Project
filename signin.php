@@ -29,7 +29,7 @@ session_start();
       <h1 class="title">SIGN IN</h1>
       <div class="underline"></div>
         <div class="smaller-container">
-          <form action="check-login.php" method="post">
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="si-container">
 
               <label for="uname"><b>Username</b></label>
@@ -69,44 +69,46 @@ session_start();
                 $psw = trim($_POST["psw"]);
                 $admin = "admin";
 
-                $servername = "localhost";
-                $username = "root";
-                $pswrd = "";
-                $dbname = "services";
 
-                $conn = new mysqli($servername, $username, $pswrd, $dbname);
-
-                if ($conn->connect_error) {
-                      die("Connection failed: " . $conn->connect_error);
+                if($uname == "admin" && $psw == "admin" && $_POST['member'] == "admin"){
+                  header("location: db.php");
                 }
+                else{
+                  $servername = "localhost";
+                  $username = "root";
+                  $pswrd = "";
+                  $dbname = "services";
 
-                $sql = "SELECT USERID, PSWRD FROM users WHERE USERNAME = '$uname'";
+                  $conn = new mysqli($servername, $username, $pswrd, $dbname);
 
-                try {
-                  $result = $conn->query($sql);
-
-                  if ($result->num_rows > 0) {
-                    if ($row["USERNAME"] == $admin && $row["PSWRD"] == $psw){
-                      $_SESSION['loggedin'] = true;
-                      $_SESSION['userid'] = $row["USERID"];
-                      header("location: db.php");
-                    }
-                    elseif($row["PSWRD"] == $psw){
-                      $_SESSION['loggedin'] = true;
-                      $_SESSION['userid'] = $row["USERID"];
-                      header("location: index.php");
-                    }
-                    else{
-                      echo '<script>alert("Incorrect password.")</script>';
-                    }
-                  } else {
-                    echo '<script>alert("Username not found.")</script>';
+                  if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
                   }
-                } catch (Exception $e) {
-                    echo "<h2> ERROR: " . $e->getMessage() . "</h2>";
-                  }
+
+                  $sql = "SELECT USERID, PSWRD FROM users WHERE USERNAME = '$uname'";
+
+                  try {
+                    $result = $conn->query($sql);
+
+                    if ($result->num_rows > 0) {
+                      $row = $result->fetch_assoc();
+                      if($row["PSWRD"] === $psw){
+                        $_SESSION['loggedin'] = true;
+                        $_SESSION['userid'] = $row["USERID"];
+                        header("location: index.php");
+                      }
+                      else{
+                        echo '<script>alert("Incorrect password.")</script>';
+                      }
+                    } else {
+                      echo '<script>alert("Username not found.")</script>';
+                    }
+                  } catch (Exception $e) {
+                      echo "<h2> ERROR: " . $e->getMessage() . "</h2>";
+                    }
                   $conn->close();
               }
+            }
     ?>
   </body>
 </html>
