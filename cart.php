@@ -65,7 +65,8 @@ session_start();
           DEST VARCHAR(50) NOT NULL,
           DIST VARCHAR(5) NOT NULL,
           PRICE VARCHAR(5) NOT NULL,
-          TM TIME NOT NULL
+          TM TIME NOT NULL,
+          TYPE VARCHAR(4) DEFAULT 'sA'
           )";
 
     if($conn->query($sql) === TRUE){}
@@ -118,7 +119,8 @@ session_start();
       SRC VARCHAR(50) NOT NULL,
       DEST VARCHAR(50) NOT NULL,
       DIST VARCHAR(5) NOT NULL,
-      TM TIME NOT NULL)";
+      TM TIME NOT NULL,
+      TYPE VARCHAR DEFAULT 'sB')";
 
       if($conn->query($sql) === TRUE){}
 

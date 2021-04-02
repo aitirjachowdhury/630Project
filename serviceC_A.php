@@ -279,7 +279,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" )
           DIST VARCHAR(5) NOT NULL,
           PRICE VARCHAR(5) NOT NULL,
           TM TIME NOT NULL,
-          TYPE VARCHAR(4) DEFAULT 'sA'
+          TYPE VARCHAR(4) NOT NULL
           )";
 
     if($conn->query($sql) === TRUE){}
@@ -292,11 +292,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST" )
     $price = ((float) $_POST['price']) * $check;
     $price2 = round($price, 2);
     $tm = $_POST['time'];
-    $sql = "INSERT INTO TRIPS (USERID, CARID, SRC, DEST, DIST, PRICE, TM, TYPE) VALUES ('$uid', '$cid', '$src', '$dest', '$dist', '$price2', '$tm', 'sA')";
+    $sql = "INSERT INTO TRIPS (USERID, CARID, SRC, DEST, DIST, PRICE, TM, TYPE) VALUES ('$uid', '$cid', '$src', '$dest', '$dist', '$price2', '$tm', 'sCA')";
 
     try {
         if($conn->query($sql) === TRUE){
-          header('Location: cart.php');
+         $sql2 = "SELECT * FROM TRIPS WHERE USERID = '$uid' AND TYPE = 'sCA'";
+         $check = $conn->query($sql2);
+         $num_rows = mysqli_num_rows($check);
+
+         if($num_rows % 2 === 0) {
+            header('Location: compare.php');
+         } else {
+            header('Location: serviceC_A.php');
+         }
         } else {
           throw new Exception("Something went wrong! Try again later.");
         }

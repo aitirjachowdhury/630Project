@@ -378,7 +378,7 @@ $( "#set" ).click(function(e) {
                     DEST VARCHAR(50) NOT NULL,
                     DIST VARCHAR(5) NOT NULL,
                     TM TIME NOT NULL,
-                    TYPE VARCHAR(4) DEFAULT 'sB'
+                    TYPE VARCHAR(4) NOT NULL
                     )";
 
                 if($conn->query($sql) === TRUE){}
@@ -389,11 +389,19 @@ $( "#set" ).click(function(e) {
                 $dest = $_POST['destaddr'];
                 $dist = $_POST['distance'];
                 $tm = $_POST['time'];
-                $sql = "INSERT INTO ITEMS (PRODUCTID, USERID, SRC, DEST, DIST, TM, TYPE) VALUES ('$iid', '$uid', '$src', '$dest', '$dist', '$tm', 'sB')";
+                $sql = "INSERT INTO ITEMS (PRODUCTID, USERID, SRC, DEST, DIST, TM, TYPE) VALUES ('$iid', '$uid', '$src', '$dest', '$dist', '$tm', 'sCB')";
 
                 try {
                     if($conn->query($sql) === TRUE){
-                      header('Location: cart.php');
+                      $sql2 = "SELECT * FROM ITEMS WHERE USERID = '$uid' AND TYPE = 'sCB'";
+                      $check = $conn->query($sql2);
+                      $num_rows = mysqli_num_rows($check);
+
+                      if($num_rows % 2 === 0) {
+                        header('Location: compare_CB.php');
+                      } else {
+                        header('Location: serviceC_B.php');
+                      }
                     } else {
                       throw new Exception("Something went wrong! Try again later.");
                     }
