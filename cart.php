@@ -55,6 +55,7 @@ session_start();
       if(isset($_SESSION['userid']))
       {
         $iuserid = (int) $_SESSION['userid'];
+        $_SESSION['total'] =0;
 
         // TO CREATE TABLE
         $sql = "CREATE TABLE TRIPS (
@@ -81,7 +82,6 @@ session_start();
 
     # TO PRINT
     if(count($datas) != 0){
-      $_SESSION['total'] =0;
       $html = "";
       foreach($datas as $row) {
         $icarid = (int) $row['carid'];

@@ -15,12 +15,14 @@
       </div>
     </div>
 
+    <!-- For SPA -->
     <div class="sidenav">
-    <a href="#">About</a>
-    <a href="#">Services</a>
-    <a href="#">Clients</a>
-    <a href="#">Contact</a>
-  </div>
+      <br><br>
+      <a href="#">View</a>
+      <a href="#">Insert</a>
+      <a href="#">Delete</a>
+      <a href="#">Update</a>
+    </div>
 
     <div class="main">
       <br><br><br>
