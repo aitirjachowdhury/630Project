@@ -31,124 +31,31 @@
        </style>
 
        <script>
-       // Get the modal
-       var modal = document.getElementById("myModal");
-       // Get the button that opens the modal
-       var btn = document.getElementById("myBtn");
-       // Get the <span> element that closes the modal
-       var span = document.getElementsByClassName("close")[0];
-       var count = 0;
-       // When the user clicks the button, open the modal
-       function openBox() {
-         modal.style.display = "block";
-       }
-       // When the user clicks on <span> (x), close the modal
-       span.onclick = function() {
-         modal.style.display = "none";
-         $('#srcaddr').val('');
-         $('#destaddr').val('');
-         map = new google.maps.Map(document.getElementById("map"),
-                   { zoom: 15, center: {lat: 43.6533, lng: -79.3834}});
-       }
-       // When the user clicks anywhere outside of the modal, close it
-       window.onclick = function(event) {
-         if (event.target == modal) {
-           modal.style.display = "none";
-           $('#srcaddr').val('');
-           $('#destaddr').val('');
-           map = new google.maps.Map(document.getElementById("map"),
-                   { zoom: 15, center: {lat: 43.6533, lng: -79.3834}});
-         }
-       }
+          // Get the modal
+          var modal = document.getElementById("myModal");
 
-       var map;
+          // Get the button that opens the modal
+          var btn = document.getElementById("myBtn");
 
+          // Get the <span> element that closes the modal
+          var span = document.getElementsByClassName("close")[0];
 
-       function initMap()
-     {
-       map = new google.maps.Map(document.getElementById("map"),
-                 { zoom: 15, center: {lat: 43.6533, lng: -79.3834}});
-     }
+          // When the user clicks the button, open the modal
+          btn.onclick = function() {
+            modal.style.display = "block";
+          }
 
-       function displayRoute(origin, destination, directionsService, directionsDisplay) {
-           directionsService.route({
-               origin: origin,
-               destination: destination,
-               travelMode: google.maps.DirectionsTravelMode.DRIVING,
-               avoidTolls: true
-           }, function (response, status) {
-               if (status === 'OK') {
-                   directionsDisplay.setMap(map);
-                   directionsDisplay.setDirections(response);
-               } else {
-                   directionsDisplay.setMap(null);
-                   directionsDisplay.setDirections(null);
-                   alert('Could not display directions due to: ' + status);
-               }
-           });
-       }
+          // When the user clicks on <span> (x), close the modal
+          span.onclick = function() {
+            modal.style.display = "none";
+          }
 
-       function calculateDistance(source, destination) {
-
-       var DistanceMatrixService = new google.maps.DistanceMatrixService();
-       DistanceMatrixService.getDistanceMatrix(
-           {
-               origins: [source],
-               destinations: [destination],
-               travelMode: google.maps.DirectionsTravelMode.DRIVING,
-               unitSystem: google.maps.UnitSystem.IMPERIAL, // miles and feet.
-               avoidHighways: false,
-               avoidTolls: true
-           }, function (response, status) {
-             if (status != google.maps.DistanceMatrixStatus.OK) {
-               $('#result').html(err);
-           } else {
-               var origin = response.originAddresses[0];
-               var destination = response.destinationAddresses[0];
-               if (response.rows[0].elements[0].status === "ZERO_RESULTS") {
-                   alert("Sorry! not available.");
-               } else {
-                   var distance = response.rows[0].elements[0].distance;
-                 $('#distance').val(distance.value / 1000);
-               }
-             }
-             });
-       }
-
-
-//ON SUBMIT
-$( "#set" ).click(function(e) {
- e.preventDefault();
-           map = new google.maps.Map(document.getElementById("map"),
-                 { zoom: 15, center: {lat: 43.6533, lng: -79.3834}});
-
-           var source = $('#srcaddr').val();
-           var destination = $('#destaddr').val();
-           var directionsDisplay = new google.maps.DirectionsRenderer({'draggable': false});
-           var directionsService = new google.maps.DirectionsService();
-          displayRoute(source, destination, directionsService, directionsDisplay);
-          calculateDistance(source, destination);
-         });
-
-         //DRAG AND DROP FUNCTIONS
-         var count = 0;
-         function allowDrop(ev) {
-           ev.preventDefault();
-         }
-         function drag(ev) {
-           ev.dataTransfer.setData("text", ev.target.id);
-         }
-         function drop(ev) {
-           ev.preventDefault();
-           var data = ev.dataTransfer.getData("text");
-           ev.target.appendChild(document.getElementById(data));
-           $('#flowerid').val(data);
-           count++;
-           if (count > 1 ){
-             alert("Cart Full! Proceed to checkout. ");
-             openBox();
-           }
-         }
+          // When the user clicks anywhere outside of the modal, close it
+          window.onclick = function(event) {
+            if (event.target == modal) {
+              modal.style.display = "none";
+            }
+          }
        </script>
     </head>
 
@@ -165,8 +72,22 @@ $( "#set" ).click(function(e) {
       </div>
     </div>
 
-            <br><br><br>
+        <br><br><br>
 
+        <!-- Trigger/Open The Modal -->
+        <button id="revBtn">Let us know what you think!</button>
+
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+
+          <!-- Modal content -->
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Some text in the Modal..</p>
+          </div>
+
+        </div>
+<!--
         <div id="myModal" class="modal">
           <div class="modal-content">
               <span class="close">&times;</span>
@@ -181,7 +102,10 @@ $( "#set" ).click(function(e) {
         <div class="review">
             <button id="revBtn" onclick="openBox()">Let us know what you think!</button>
         </div>
-                <br><br><br>
+      -->
+
+
+        <br><br><br>
 
         <h2 style="text-align: center;">Our customers love us!</h2>
 
