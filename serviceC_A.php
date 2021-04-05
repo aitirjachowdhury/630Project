@@ -19,7 +19,7 @@ session_start();
       <a class="active" href="index.php">Home</a>
       <a href="about.html">About Us</a>
       <a href="contact.html">Contact Us</a>
-      <a href="reviews.html">Reviews</a>
+      <a href="reviews.php">Reviews</a>
       <a href="cart.php">Shopping Cart</a>
       <a href="signin.php">Sign-in</a>
       </div>

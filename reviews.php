@@ -10,53 +10,6 @@
        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-       <!-- This code was retrieved from bootstrapious.com-->
-       <style>
-          .width-auto {
-            width: auto;
-          }
-
-          .text-lg {
-           font-size: 2rem;
-          }
-
-          .carousel-indicators li {
-            border: none;
-            background: #cccccc;
-          }
-
-         .carousel-indicators li.active {
-           background: #333;
-         }
-       </style>
-
-       <script>
-          // Get the modal
-          var modal = document.getElementById("myModal");
-
-          // Get the button that opens the modal
-          var btn = document.getElementById("myBtn");
-
-          // Get the <span> element that closes the modal
-          var span = document.getElementsByClassName("close")[0];
-
-          // When the user clicks the button, open the modal
-          btn.onclick = function() {
-            modal.style.display = "block";
-          }
-
-          // When the user clicks on <span> (x), close the modal
-          span.onclick = function() {
-            modal.style.display = "none";
-          }
-
-          // When the user clicks anywhere outside of the modal, close it
-          window.onclick = function(event) {
-            if (event.target == modal) {
-              modal.style.display = "none";
-            }
-          }
-       </script>
     </head>
 
     <body>
@@ -71,39 +24,6 @@
       <a href="signin.php">Sign-in</a>
       </div>
     </div>
-
-        <br><br><br>
-
-        <!-- Trigger/Open The Modal -->
-        <button id="revBtn">Let us know what you think!</button>
-
-        <!-- The Modal -->
-        <div id="myModal" class="modal">
-
-          <!-- Modal content -->
-          <div class="modal-content">
-            <span class="close">&times;</span>
-            <p>Some text in the Modal..</p>
-          </div>
-
-        </div>
-<!--
-        <div id="myModal" class="modal">
-          <div class="modal-content">
-              <span class="close">&times;</span>
-              <div class="locSelector">
-              <form id="distance_form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                  <button type="submit" style="margin-bottom: 20px;" name="order">Order</button>
-              </form>
-              </div>
-          </div>
-        </div>
-
-        <div class="review">
-            <button id="revBtn" onclick="openBox()">Let us know what you think!</button>
-        </div>
-      -->
-
 
         <br><br><br>
 
@@ -146,7 +66,7 @@
                                         <div class="media"><img class="rounded-circle img-thumbnail" src="https://res.cloudinary.com/mhmd/image/upload/v1579676165/avatar-3_hdxocq.jpg" alt="" width="75">
                                             <div class="media-body ml-3">
                                                 <blockquote class="blockquote border-0 p-0">
-                                                    <p class="font-italic lead"> <i class="fa fa-quote-left mr-3 text-success"></i>As someone who truly cares for the environment, I love how eco-friendly their trips are! They also provide great service for a reasonable price. I will definitely be using their services more often.</p>
+                                                    <p class="font-italic lead"> <i class="fa fa-quote-left mr-3 text-success"></i>As someone who truly cares for the environment, I love how eco-friendly their trips are! I will definitely be using their services more often.</p>
                                                     <footer class="blockquote-footer">
                                                         <cite title="Source Title">Anya Kim-Taylor, Vaughan, ON</cite>
                                                     </footer>
@@ -183,5 +103,108 @@
                 </div>
             </div>
         </section>
+
+
+<!-- Getting reviews from users -->
+
+                <!-- Trigger/Open The Modal -->
+                <button id="revBtn">Let us know what you think!</button>
+
+                <!-- The Modal -->
+                <div id="myModal" class="modal">
+
+                  <!-- Modal content -->
+                  <div class="modal-content" id="revModal">
+                    <span class="close">&times;</span>
+                    <h1 style="text-align: center;">Let us know what you think!</h1>
+                    <form class="revForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                      <label for="service">Services: </label>
+                      <select class="service" name="service">
+                        <option value="noSel">Select a service</option>
+                        <option value="A">Service A</option>
+                        <option value="B">Service B</option>
+                        <option value="C">Service C</option>
+                        <option value="D">Service D</option>
+                      </select>
+                      <label for="stars">Rating: </label>
+                      <div class="stars" data-rating="3">
+                        <span class="star"></span>
+                        <span class="star"></span>
+                        <span class="star"></span>
+                        <span class="star"></span>
+                        <span class="star"></span>
+                      </div>
+                      <textarea name="review" rows="8" cols="80" placeholder="Something else you want to say (optional)"></textarea>
+                      <button type="submit" name="button" style="margin-bottom: 20px;" >Submit Review</button>
+                    </form>
+                  </div>
+
+                </div>
+
+                <script>
+                    // Get the modal
+                    var modal = document.getElementById("myModal");
+
+                    // Get the button that opens the modal
+                    var btn = document.getElementById("revBtn");
+
+                    // Get the <span> element that closes the modal
+                    var span = document.getElementsByClassName("close")[0];
+
+                    // When the user clicks the button, open the modal
+                    btn.onclick = function() {
+                      modal.style.display = "block";
+                    }
+
+                    // When the user clicks on <span> (x), close the modal
+                    span.onclick = function() {
+                      modal.style.display = "none";
+                    }
+
+                    // When the user clicks anywhere outside of the modal, close it
+                    window.onclick = function(event) {
+                      if (event.target == modal) {
+                        modal.style.display = "none";
+                      }
+                    }
+
+                    //getting the star rating
+                    document.addEventListener('DOMContentLoaded', function(){
+                        let stars = document.querySelectorAll('.star');
+                        stars.forEach(function(star){
+                            star.addEventListener('click', setRating);
+                        });
+
+                        let rating = parseInt(document.querySelector('.stars').getAttribute('data-rating'));
+                        let target = stars[rating - 1];
+                        target.dispatchEvent(new MouseEvent('click'));
+                    });
+
+                    function setRating(ev){
+                        let span = ev.currentTarget;
+                        let stars = document.querySelectorAll('.star');
+                        let match = false;
+                        let num = 0;
+                        stars.forEach(function(star, index){
+                            if(match){
+                                star.classList.remove('rated');
+                            }else{
+                                star.classList.add('rated');
+                            }
+
+                            //are we currently looking at the span that was clicked
+                            if(star === span){
+                                match = true;
+                                num = index + 1;
+                            }
+                        });
+                        document.querySelector('.stars').setAttribute('data-rating', num);
+                    }
+                </script>
+
+
+
+                        <br><br><br>
+
     </body>
 </html>
