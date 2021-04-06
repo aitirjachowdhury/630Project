@@ -68,7 +68,7 @@
            {
              //CAR TABLE VIEW
              if ($_POST['table'] === "CARS" && $_POST['option'] === "view"){
-               $sql = "SELECT * FROM cars";
+               $sql = "SELECT * FROM CARS";
                $result = mysqli_query($conn, $sql);
 
                echo "<table>
@@ -85,7 +85,7 @@
                    while($row = mysqli_fetch_assoc($result)){
                        echo "<tr><td>" . $row["carid"]
                        .  " </td><td> " . $row["model"]
-                       .  " </td><td> " . $row["imgs"]
+                       .  " </td><td> " . $row["img"]
                        .  " </td><td> " . $row["price"]
                        .  " </td><td> " . $row["available"]
                        . " </td></tr><br>";
@@ -104,7 +104,7 @@
              //FLOWER TABLE VIEW
              elseif ($_POST['table'] === "FLOWERS" && $_POST['option'] === "view"){
 
-                $sql = "SELECT * FROM flower";
+                $sql = "SELECT * FROM FLOWER";
                 $result = mysqli_query($conn, $sql);
 
                 echo "<table>
@@ -191,12 +191,12 @@
                   if(mysqli_num_rows($result) > 0){
 
                     while($row = mysqli_fetch_assoc($result)){
-                        echo "<tr><td>" . $row["PRODUCTID"]
-                        .  " </td><td> " . $row["USERID"]
-                        .  " </td><td> " . $row["SRC"]
-                        .  " </td><td> " . $row["DEST"]
-                        .  " </td><td> " . $row["DIST"]
-                        .  " </td><td> " . $row["TM"]
+                        echo "<tr><td>" . $row["productid"]
+                        .  " </td><td> " . $row["userid"]
+                        .  " </td><td> " . $row["src"]
+                        .  " </td><td> " . $row["dest"]
+                        .  " </td><td> " . $row["dist"]
+                        .  " </td><td> " . $row["tm"]
                         . " </td></tr><br>";
                     }
                     echo "</table>";
@@ -263,14 +263,14 @@
                  if(mysqli_num_rows($result) > 0){
 
                    while($row = mysqli_fetch_assoc($result)){
-                       echo "<tr><td>" . $row["TRIPID"]
-                       .  " </td><td> " . $row["USERID"]
-                       .  " </td><td> " . $row["CARID"]
-                       .  " </td><td> " . $row["SRC"]
-                       .  " </td><td> " . $row["DEST"]
-                       .  " </td><td> " . $row["DIST"]
-                       .  " </td><td> " . $row["PRICE"]
-                       .  " </td><td> " . $row["TM"]
+                       echo "<tr><td>" . $row["tripid"]
+                       .  " </td><td> " . $row["userid"]
+                       .  " </td><td> " . $row["carid"]
+                       .  " </td><td> " . $row["src"]
+                       .  " </td><td> " . $row["dest"]
+                       .  " </td><td> " . $row["dist"]
+                       .  " </td><td> " . $row["price"]
+                       .  " </td><td> " . $row["tm"]
                        . " </td></tr><br>";
                    }
                    echo "</table>";
@@ -304,14 +304,14 @@
                   if(mysqli_num_rows($result) > 0){
 
                     while($row = mysqli_fetch_assoc($result)){
-                        echo "<tr><td>" . $row["USERID"]
-                        .  " </td><td> " . $row["USERNAME"]
-                        .  " </td><td> " . $row["PSWRD"]
-                        .  " </td><td> " . $row["FIRST_NAME"]
-                        .  " </td><td> " . $row["LAST_NAME"]
-                        .  " </td><td> " . $row["TEL_NO"]
-                        .  " </td><td> " . $row["MAIL_ADDR"]
-                        .  " </td><td> " . $row["EMAIL"]
+                        echo "<tr><td>" . $row["userid"]
+                        .  " </td><td> " . $row["username"]
+                        .  " </td><td> " . $row["pswrd"]
+                        .  " </td><td> " . $row["firstName"]
+                        .  " </td><td> " . $row["lastName"]
+                        .  " </td><td> " . $row["telNo"]
+                        .  " </td><td> " . $row["mailAddr"]
+                        .  " </td><td> " . $row["email"]
                         . " </td></tr><br>";
                     }
                     echo "</table>";
@@ -332,8 +332,8 @@
 
                     <label for='model'> Model: </label>
                     <input type='text' name='model' id='insertForm'></input>
-                    <label for='imgs'> Image: </label>
-                    <input type='text' name='imgs' id='insertForm'></input>
+                    <label for='img'> Image: </label>
+                    <input type='text' name='img' id='insertForm'></input>
                     <label for='price'> Price: </label>
                     <input type='text' name='price' id='insertForm'></input>
 
@@ -423,7 +423,6 @@
                     <input type='submit' name='insert' value='Insert Data'>
                   </form>
                 </div>";
-
               }
 
               else if ($_POST['table'] === "TRIPS" && $_POST['option'] === "insert"){
@@ -448,7 +447,6 @@
                     <input type='submit' name='insert' value='Insert Data'>
                   </form>
                 </div>";
-
               }
 
               else if ($_POST['table'] === "USERS" && $_POST['option'] === "insert"){
@@ -459,14 +457,14 @@
                     <input type='text' name='username' id='insertForm'></input>
                     <label for='pswrd'> Password: </label>
                     <input type='text' name='pswrd' id='insertForm'></input>
-                    <label for='first_name'> First Name: </label>
-                    <input type='text' name='first_name' id='insertForm'></input>
-                    <label for='last_name'> Surname: </label>
-                    <input type='text' name='last_name' id='insertForm'></input>
-                    <label for='tel_no'> Tel. No: </label>
-                    <input type='text' name='tel_no' id='insertForm'></input>
-                    <label for='mail_addr'> Mailing Address: </label>
-                    <input type='text' name='mail_addr' id='insertForm'></input>
+                    <label for='firstName'> First Name: </label>
+                    <input type='text' name='firstName' id='insertForm'></input>
+                    <label for='lastName'> Surname: </label>
+                    <input type='text' name='lastName' id='insertForm'></input>
+                    <label for='telNo'> Tel. No: </label>
+                    <input type='text' name='telNo' id='insertForm'></input>
+                    <label for='mailAddr'> Mailing Address: </label>
+                    <input type='text' name='mailAddr' id='insertForm'></input>
                     <label for='email'> Email: </label>
                     <input type='text' name='email' id='insertForm'></input>
 
@@ -611,11 +609,11 @@
                 <label for='productid'> Product ID: </label>
                 <input type='text' name='productid' id='insertForm'></input>
                 <select name='items' style='width:200px;'>
-                <option value='SRC'>Source</option>
-                <option value='DEST'>Destination</option>
-                <option value='DIST'>Distance</option>
-                <option value='TM'>Time</option>
-                <option value='USERID'>User ID</option>
+                <option value='src'>Source</option>
+                <option value='dest'>Destination</option>
+                <option value='dist'>Distance</option>
+                <option value='tm'>Time</option>
+                <option value='userid'>User ID</option>
                 </select>
                 <label for='val' style='margin-left: 15px;'> Value: </label>
                 <input type='text' name='val' id='insertForm'></input>
@@ -630,12 +628,12 @@
                 <label for= tripid'> Trip ID: </label>
                 <input type='text' name='tripid' id='insertForm'></input>
                 <select name='trips' style='width:200px;'>
-                <option value='CARID'>Car ID</option>
-                <option value='SRC'>Source</option>
-                <option value='DEST'>Destination</option>
-                <option value='DIST'>Distance</option>
-                <option value='TM'>Time</option>
-                <option value='USERID'>User ID</option>
+                <option value='carid'>Car ID</option>
+                <option value='src'>Source</option>
+                <option value='dest'>Destination</option>
+                <option value='dist'>Distance</option>
+                <option value='tm'>Time</option>
+                <option value='userid'>User ID</option>
                 </select>
                 <label for='val'> Value: </label>
                 <input type='text' name='val' id='insertForm'></input>
@@ -668,14 +666,14 @@
                 <label for='userid'> User ID: </label>
                 <input type='text' name='userid' id='insertForm'></input>
                 <select name='user' style='width:200px;'>
-                <option value='BALANCE'>Balance</option>
-                <option value='USERNAME'>Username</option>
-                <option value='PSWRD'>Password</option>
-                <option value='FIRST_NAME'>First Name</option>
-                <option value='LAST_NAME'>Last Name</option>
-                <option value='TEL_NO'>Phone Number</option>
-                <option value='MAIL_ADDR'>Mail Address</option>
-                <option value='EMAIL'>Email</option>
+                <option value='balance'>Balance</option>
+                <option value='username'>Username</option>
+                <option value='pswrd'>Password</option>
+                <option value='firstName'>First Name</option>
+                <option value='lastName'>Last Name</option>
+                <option value='telNo'>Phone Number</option>
+                <option value='mailAddr'>Mail Address</option>
+                <option value='email'>Email</option>
                 </select>
                 <label for='val'> Value: </label>
                 <input type='text' name='val' id='insertForm'></input>

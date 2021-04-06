@@ -48,13 +48,13 @@ session_start();
           foreach($datas as $row) {
             $icarid = (int) $row['carid'];
             $itripid = $row['tripid'];
-            $sql = "SELECT model, imgs, price FROM CARS WHERE carid = $icarid";
+            $sql = "SELECT model, img, price FROM CARS WHERE carid = $icarid";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
             $row2 = $result->fetch_assoc(); 
             $html .= " <div class=\"col-3\">
-            <tr><img src=\"".$row2["imgs"]."\">
+            <tr><img src=\"".$row2["img"]."\">
             <p>".$row2["model"]."</p>
             <small>Price per km: $".$row2["price"]."</small>
             </td><br>

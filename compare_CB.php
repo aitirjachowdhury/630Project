@@ -35,7 +35,7 @@ session_start();
                      $iuserid = (int) $_SESSION['userid'];
 
                       # TO READ DATA
-                      $sql = "SELECT * FROM ITEMS WHERE userid = $iuserid AND TYPE = 'sCB'";
+                      $sql = "SELECT * FROM ITEMS WHERE userid = $iuserid AND type = 'sCB'";
 
                       $result = mysqli_query($conn, $sql);
 
@@ -48,7 +48,7 @@ session_start();
                       if(count($datas) != 0){
                         $html = "";
                         foreach($datas as $row) {
-                            $key2 = $row["PRODUCTID"];
+                            $key2 = $row["productid"];
                             $sql = "SELECT * FROM FLOWER WHERE flowerid = '$key2'";
 
                             $result = $conn->query($sql);
@@ -62,9 +62,9 @@ session_start();
                                 <p>".$row2["flowerType"]."</p>
                                 <small>Price per km: $".$row2["price"]."</small>
                                 </td><br>
-                                <td>Source: ".$row["SRC"]."</td><br>
-                                <td>Destination: ".$row["DEST"]."</td><br>
-                                <td>Distance: ".round($row["DIST"],2)." km</td><br>
+                                <td>Source: ".$row["src"]."</td><br>
+                                <td>Destination: ".$row["dest"]."</td><br>
+                                <td>Distance: ".round($row["dist"],2)." km</td><br>
                                 <td>Total: $".$row2["price"]."</td><br>
                                 <button>Remove</button> </tr></div>";}
                                 echo $html; 

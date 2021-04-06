@@ -18,12 +18,12 @@
         $img = $_POST['img'];
         $price = $_POST['price'];
 
-        $sql = "INSERT INTO flower(flowerid, flowerType, storeCode, img, price)
+        $sql = "INSERT INTO FLOWER(flowerid, flowerType, storeCode, img, price)
                               VALUES ('$flowerid', '$flowerType', '$storeCode', '$img', '$price')";
 
         try {
             if($conn->query($sql) === TRUE){
-               $sql = "SELECT * FROM flower";
+               $sql = "SELECT * FROM FLOWER";
                $result = mysqli_query($conn, $sql);
 
                    echo "<table>

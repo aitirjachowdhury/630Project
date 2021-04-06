@@ -59,15 +59,14 @@ session_start();
 
         if($_SESSION['service'] == "sD"){
           // TO CREATE TABLE
-          $sql = "CREATE TABLE orderscl (
-            ordersclid int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+          $sql = "CREATE TABLE ORDERSCL (
+            cid INT PRIMARY KEY,
             userid INT NOT NULL,
-            cid INT NOT NULL,
             src VARCHAR(50) NOT NULL,
             dest VARCHAR(50) NOT NULL,
             dist VARCHAR(5) NOT NULL,
             price VARCHAR(5) NOT NULL,
-            tm TIME NOT NULL,
+            tm TIME NOT NULL
             )";
 
           if($conn->query($sql) === TRUE){}
@@ -85,7 +84,7 @@ session_start();
           $html = "";
           foreach($datas as $row) {
           $icleanerid = (int) $row['cid'];
-          $sql = "SELECT cname, imgs, price FROM cleaners WHERE cid = $icleanerid";
+          $sql = "SELECT cname, img, price FROM cleaners WHERE cid = $icleanerid";
 
           $result = $conn->query($sql);
 
@@ -94,7 +93,7 @@ session_start();
             $html .= " <tr>
             <td>
               <div class=\"cart-info\">
-              <img src=\"".$row2["imgs"]."\">
+              <img src=\"".$row2["img"]."\">
               <div>
               <p>".$row2["cname"]."</p>
               <small>Price per day: $".$row2["price"]."</small>
@@ -113,15 +112,15 @@ session_start();
         elseif($_SESSION['service'] == "sA"){
         // TO CREATE TABLE
         $sql = "CREATE TABLE TRIPS (
-          TRIPID int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-          USERID INT NOT NULL,
-          CARID INT NOT NULL,
-          SRC VARCHAR(50) NOT NULL,
-          DEST VARCHAR(50) NOT NULL,
-          DIST VARCHAR(5) NOT NULL,
-          PRICE VARCHAR(5) NOT NULL,
-          TM TIME NOT NULL,
-          TYPE VARCHAR(4) DEFAULT 'sA'
+          tripid int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+          userid INT NOT NULL,
+          carid INT NOT NULL,
+          src VARCHAR(50) NOT NULL,
+          dest VARCHAR(50) NOT NULL,
+          dist VARCHAR(5) NOT NULL,
+          price VARCHAR(5) NOT NULL,
+          tm TIME NOT NULL,
+          type VARCHAR(4) DEFAULT 'sA'
           )";
 
     if($conn->query($sql) === TRUE){}
@@ -139,7 +138,7 @@ session_start();
       $html = "";
       foreach($datas as $row) {
         $icarid = (int) $row['carid'];
-        $sql = "SELECT model, imgs, price FROM CARS WHERE carid = $icarid";
+        $sql = "SELECT model, img, price FROM CARS WHERE carid = $icarid";
 
         $result = $conn->query($sql);
 
@@ -148,7 +147,7 @@ session_start();
           $html .= " <tr>
           <td>
             <div class=\"cart-info\">
-            <img src=\"".$row2["imgs"]."\">
+            <img src=\"".$row2["img"]."\">
             <div>
             <p>".$row2["model"]."</p>
             <small>Price per km: $".$row2["price"]."</small>
@@ -170,13 +169,13 @@ session_start();
 
       // TO CREATE TABLE
       $sql = "CREATE TABLE ITEMS (
-      PRODUCTID VARCHAR(4) PRIMARY KEY NOT NULL,
-      USERID INT NOT NULL,
-      SRC VARCHAR(50) NOT NULL,
-      DEST VARCHAR(50) NOT NULL,
-      DIST VARCHAR(5) NOT NULL,
-      TM TIME NOT NULL,
-      TYPE VARCHAR DEFAULT 'sB')";
+      productid VARCHAR(4) PRIMARY KEY,
+      userid INT NOT NULL,
+      src VARCHAR(50) NOT NULL,
+      dest VARCHAR(50) NOT NULL,
+      dist VARCHAR(5) NOT NULL,
+      tm TIME NOT NULL,
+      type VARCHAR DEFAULT 'sB')";
 
       if($conn->query($sql) === TRUE){}
 
@@ -194,7 +193,7 @@ session_start();
         if(count($datas) != 0){
           $html = "";
           foreach($datas as $row) {
-            $key2 = $row["PRODUCTID"];
+            $key2 = $row["productid"];
             $sql = "SELECT * FROM FLOWER WHERE flowerid = '$key2'";
 
             $result = $conn->query($sql);
@@ -211,9 +210,9 @@ session_start();
                 </div>
                 </div>
             </td>
-            <td>".$row["SRC"]."</td>
-            <td>".$row["DEST"]."</td>
-            <td>".round($row["DIST"],2)." km</td>
+            <td>".$row["src"]."</td>
+            <td>".$row["dest"]."</td>
+            <td>".round($row["dist"],2)." km</td>
             <td>$".$row2["price"]."</td> </tr>
             ";}
 
@@ -295,7 +294,7 @@ session_start();
 
               // TO CREATE TABLE
             $sql = "CREATE TABLE ORDERS(
-                orderid INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+                orderid INT PRIMARY KEY AUTO_INCREMENT,
                 userid INT NOT NULL,
                 tripid INT NOT NULL,
                 cleanerid INT NOT NULL,
@@ -310,13 +309,13 @@ session_start();
           $icleanerid;
 
           if($_SESSION['service'] == "sA"){
-            $sql = "SELECT TRIPID FROM TRIPS WHERE USERID = $iuserid";
+            $sql = "SELECT tripid FROM TRIPS WHERE userid = $iuserid";
 
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
               $row = $result->fetch_assoc();
-              $itripid = $row["TRIPID"];
+              $itripid = $row["tripid"];
             }
 
             $sql = "INSERT INTO ORDERS (userid, tripid) VALUES ('$iuserid', '$itripid')";
@@ -332,7 +331,7 @@ session_start();
                 echo "<script>alert('Order Successful with Order ID: ".$iorderid."');window.location.href = \"index.php\";</script>" ;
 
 
-                $sql = "DELETE FROM trips";
+                $sql = "DELETE FROM TRIPS";
                 if($conn->query($sql) === TRUE){}
                 
               } else {
@@ -344,13 +343,13 @@ session_start();
 
           }
           elseif($_SESSION['service'] == "sB"){
-            $sql = "SELECT PRODUCTID FROM ITEMS WHERE USERID = $iuserid";
+            $sql = "SELECT productid FROM ITEMS WHERE userid = $iuserid";
 
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
               $row = $result->fetch_assoc();
-              $iproductid = $row["PRODUCTID"];
+              $iproductid = $row["productid"];
             }
 
             $sql = "INSERT INTO ORDERS (userid, productid) VALUES ('$iuserid', '$iproductid')";

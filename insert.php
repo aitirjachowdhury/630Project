@@ -14,14 +14,14 @@ include 'db.php';
     if (isset($_POST['insert'])){
 
         $model = $_POST['model'];
-        $imgs = $_POST['imgs'];
+        $img = $_POST['img'];
         $price = $_POST['price'];
 
-        $sql = "INSERT INTO CARS (model, imgs, price) VALUES ('$model', '$imgs', '$price')";
+        $sql = "INSERT INTO CARS (model, img, price) VALUES ('$model', '$img', '$price')";
 
         try {
             if($conn->query($sql) === TRUE){
-               $sql = "SELECT * FROM cars";
+               $sql = "SELECT * FROM CARS";
                $result = mysqli_query($conn, $sql);
 
                echo "<table>
@@ -39,7 +39,7 @@ include 'db.php';
                    while($row = mysqli_fetch_assoc($result)){
                        echo "<tr><td>" . $row["carid"]
                        .  " </td><td> " . $row["model"]
-                       .  " </td><td> " . $row["imgs"]
+                       .  " </td><td> " . $row["img"]
                        .  " </td><td> " . $row["price"]
                        .  " </td><td> " . $row["available"]
                        . " </td></tr><br>";

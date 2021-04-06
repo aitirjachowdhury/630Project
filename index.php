@@ -59,7 +59,7 @@ session_start();
     ?>
 
     <div id="searchresult"></div>
-
+<!--
     <script>
       function displayRes(oid, pid, date){
         var textb = document.getElementById("searchresult");
@@ -70,7 +70,7 @@ session_start();
         textb.style.display = "block";
       }
   </script>
-
+-->
     <?php
  if($_SERVER["REQUEST_METHOD"] == "POST" )
  {
@@ -90,15 +90,15 @@ session_start();
 
         // TO CREATE TABLE
         $sql = "CREATE TABLE CARS (
-          carid int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+          carid int PRIMARY KEY AUTO_INCREMENT,
           model VARCHAR(20) NOT NULL,
-          imgs VARCHAR(30) NOT NULL,
+          img VARCHAR(30) NOT NULL,
           price VARCHAR(5) NOT NULL,
           available BIT DEFAULT 1
           )";
 
     if($conn->query($sql) === TRUE){
-      $sql = "INSERT INTO cars (model, imgs, price)
+      $sql = "INSERT INTO CARS (model, img, price)
       VALUES('Starex Minivan', 'imgs/StarexMinivan.png', '2.05'),
             ('Red Audi 2008', 'imgs/Audi.png', '1.35'),
             ('Honda 2004', 'imgs/2004.png', '0.95'),
@@ -109,7 +109,7 @@ session_start();
       if ($conn->query($sql) === true) {}
     }
 
-    $sql = "CREATE TABLE flower(
+    $sql = "CREATE TABLE FLOWER(
       flowerid VARCHAR(4) PRIMARY KEY NOT NULL,
       flowerType VARCHAR(30) NOT NULL,
       storeCode VARCHAR(20) NOT NULL,
@@ -119,7 +119,7 @@ session_start();
 
   if($conn->query($sql) === TRUE){
 
-  $sql = "INSERT INTO flower(flowerid, flowerType, storeCode, img, price)
+  $sql = "INSERT INTO FLOWER(flowerid, flowerType, storeCode, img, price)
   VALUES ('f1', 'Colorful Bouquet', 'a1', 'imgs/flowers.png', '10.00'),
         ('f2', 'White Lilies', 'b2', 'imgs/lilies.png', '13.00'),
         ('f3', 'Assorted Yellows', 'c3', 'imgs/yellowF.png', '13.00'),
@@ -130,21 +130,32 @@ session_start();
           $iorderid = $_POST["orderid"];
           $iuserid = (int) $_SESSION['userid'];
             try {
-              $sql = "SELECT orderid, productid, date_issued FROM ORDERS WHERE orderid = $iorderid AND userid = $iuserid";
+              $sql = "SELECT orderid, tripid, productid, cleanerid, date_issued FROM ORDERS WHERE orderid = $iorderid AND userid = $iuserid";
               $result = mysqli_query($conn, $sql);
               if(mysqli_num_rows($result) > 0){
                 $row = $result->fetch_assoc();
 
-                if($row["productid"] === NULL){
-                  $row["productid"] = "-";
-                }
+                if($row["tripid"] != 0){
+                  echo "<script>
+                  var textb = document.getElementById(\"searchresult\");
+                  textb.innerHTML = 'Order ID: " . $row["orderid"]."<br>Trip ID: " . $row["tripid"]."<br>Date issued: " . $row["date_issued"]."';
+                  textb.style.display = \"block\";
+                  </script>";}
 
-                echo "<script>
-                var textb = document.getElementById(\"searchresult\");
-                textb.innerHTML = 'Order ID: " . $row["orderid"]."<br>Product ID: " . $row["productid"]."<br>Date issued: " . $row["date_issued"]."';
-                textb.style.display = \"block\";
-                </script>" ;
-              }
+                elseif($row["productid"] != NULL){
+                  echo "<script>
+                  var textb = document.getElementById(\"searchresult\");
+                  textb.innerHTML = 'Order ID: " . $row["orderid"]."<br>Product ID: " . $row["productid"]."<br>Date issued: " . $row["date_issued"]."';
+                  textb.style.display = \"block\";
+                  </script>";}
+
+                elseif($row["cleanerid"] != 0){
+                  echo "<script>
+                  var textb = document.getElementById(\"searchresult\");
+                  textb.innerHTML = 'Order ID: " . $row["orderid"]."<br>Cleaner ID: " . $row["orderid"]."<br>Date issued: " . $row["date_issued"]."';
+                  textb.style.display = \"block\";
+                  </script>";}
+                }
               else{
                 echo "<script>alert('ORDER ID does not exist!')</script>" ;
               }

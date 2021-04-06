@@ -36,12 +36,12 @@
                   if(mysqli_num_rows($result) > 0){
 
                     while($row = mysqli_fetch_assoc($result)){
-                        echo "<tr><td>" . $row["PRODUCTID"]
-                        .  " </td><td> " . $row["USERID"]
-                        .  " </td><td> " . $row["SRC"]
-                        .  " </td><td> " . $row["DEST"]
-                        .  " </td><td> " . $row["DIST"]
-                        .  " </td><td> " . $row["TM"]
+                        echo "<tr><td>" . $row["productid"]
+                        .  " </td><td> " . $row["userid"]
+                        .  " </td><td> " . $row["src"]
+                        .  " </td><td> " . $row["dest"]
+                        .  " </td><td> " . $row["dist"]
+                        .  " </td><td> " . $row["tm"]
                         . " </td></tr><br>";
                     }
                     echo "</table>";

@@ -18,7 +18,7 @@
         $productid = $_POST['productid'];
         $date_issued = $_POST['date_issued'];
 
-        $sql = "INSERT INTO orders (orderid, userid, tripid, productid, date_issued)
+        $sql = "INSERT INTO ORDERS (orderid, userid, tripid, productid, date_issued)
                               VALUES ('$orderid', '$userid', '$tripid', '$productid', '$date_issued')";
 
         try {

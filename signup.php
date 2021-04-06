@@ -57,20 +57,20 @@
 
         // TO CREATE TABLE
         $sql = "CREATE TABLE users (
-              USERID int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-              USERNAME VARCHAR(30) UNIQUE NOT NULL,
-              PSWRD VARCHAR(30) NOT NULL,
-              FIRST_NAME text NOT NULL,
-              LAST_NAME text NOT NULL,
-              TEL_NO VARCHAR(10) NOT NULL,
-              MAIL_ADDR VARCHAR(50)NOT NULL,
-              EMAIL VARCHAR(40) NOT NULL,
-              BALANCE int DEFAULT 0
+              userid int PRIMARY KEY AUTO_INCREMENT,
+              username VARCHAR(30) UNIQUE NOT NULL,
+              pswrd VARCHAR(30) NOT NULL,
+              firstName text NOT NULL,
+              lastName text NOT NULL,
+              telNo VARCHAR(10) NOT NULL,
+              mailAddr VARCHAR(50)NOT NULL,
+              email VARCHAR(40) NOT NULL,
+              balance int DEFAULT 0
               )";
 
         if($conn->query($sql) === TRUE){}
 
-        $sql = "INSERT INTO users (USERNAME, PSWRD, FIRST_NAME, LAST_NAME, TEL_NO, MAIL_ADDR, EMAIL) VALUES ('$uname', '$psw', '$fname', '$lname', '$number', '$address', '$email')";
+        $sql = "INSERT INTO users (username, pswrd, firstName, lastName, telNo, mailAddr, email) VALUES ('$uname', '$psw', '$fname', '$lname', '$number', '$address', '$email')";
 
         try {
             if($conn->query($sql) === TRUE){

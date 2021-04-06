@@ -39,15 +39,15 @@
                  if(mysqli_num_rows($result) > 0){
 
                    while($row = mysqli_fetch_assoc($result)){
-                       echo "<tr><td>" . $row["USERID"]
-                       .  " </td><td> " . $row["USERNAME"]
-                       .  " </td><td> " . $row["PSWRD"]
-                       .  " </td><td> " . $row["FIRST_NAME"]
-                       .  " </td><td> " . $row["LAST_NAME"]
-                        .  " </td><td> " . $row["TEL_NO"]
-                       .  " </td><td> " . $row["MAIL_ADDR"]
-                       .  " </td><td> " . $row["EMAIL"]
-                       .  " </td><td> " . $row["BALANCE"]
+                       echo "<tr><td>" . $row["userid"]
+                       .  " </td><td> " . $row["username"]
+                       .  " </td><td> " . $row["pswrd"]
+                       .  " </td><td> " . $row["firstName"]
+                       .  " </td><td> " . $row["lastName"]
+                        .  " </td><td> " . $row["telNo"]
+                       .  " </td><td> " . $row["mailAddr"]
+                       .  " </td><td> " . $row["email"]
+                       .  " </td><td> " . $row["balance"]
                        . " </td></tr><br>";
                    }
                    echo "</table>";

@@ -18,7 +18,7 @@
         $img = $_POST['img'];
         $price = $_POST['price'];
 
-        $sql = "INSERT INTO coffee(coffeeid, coffeeType, storeCode, img, price)
+        $sql = "INSERT INTO COFFEE(coffeeid, coffeeType, storeCode, img, price)
                               VALUES ('$coffeeid', '$coffeeType', '$storeCode', '$img', '$price')";
 
         try {

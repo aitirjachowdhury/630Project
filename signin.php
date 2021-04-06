@@ -85,16 +85,17 @@ session_start();
                         die("Connection failed: " . $conn->connect_error);
                   }
 
-                  $sql = "SELECT USERID, PSWRD FROM users WHERE USERNAME = '$uname'";
+                  $sql = "SELECT userid, pswrd FROM USERS WHERE username = '$uname'";
 
                   try {
                     $result = $conn->query($sql);
 
                     if ($result->num_rows > 0) {
                       $row = $result->fetch_assoc();
-                      if($row["PSWRD"] === $psw){
+                      if($row["pswrd"] === $psw){
                         $_SESSION['loggedin'] = true;
-                        $_SESSION['userid'] = $row["USERID"];
+                        $_SESSION['userid'] = $row["userid"];
+                        $_SESSION['service'] = "";
                         header("location: index.php");
                       }
                       else{

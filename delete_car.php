@@ -37,7 +37,7 @@
                    while($row = mysqli_fetch_assoc($result)){
                        echo "<tr><td>" . $row["carid"]
                        .  " </td><td> " . $row["model"]
-                       .  " </td><td> " . $row["imgs"]
+                       .  " </td><td> " . $row["img"]
                        .  " </td><td> " . $row["price"]
                        .  " </td><td> " . $row["available"]
                        . " </td></tr><br>";

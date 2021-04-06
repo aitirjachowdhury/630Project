@@ -85,13 +85,13 @@ session_start();
           cid int PRIMARY KEY NOT NULL AUTO_INCREMENT,
           cname VARCHAR(35) NOT NULL,
           phone VARCHAR(15) NOT NULL,
-          imgs VARCHAR(30) NOT NULL,
+          img VARCHAR(30) NOT NULL,
           price VARCHAR(5) NOT NULL,
           available BIT DEFAULT 1
           )";
 
     if($conn->query($sql) === TRUE){
-      $sql = "INSERT INTO CLEANERS (cname, phone, imgs, price)
+      $sql = "INSERT INTO CLEANERS (cname, phone, img, price)
       VALUES('Squeaky Cleaning', '+1-647-799-1075', 'imgs/sc.png', '200'),
             ('Maid4Condos', '+1-647-822-0601', 'imgs/m4c.jpg', '80'),
             ('No More Chores of Toronto Cleaners', '+1-647-952-6725', 'imgs/nmc.jpg', '130')";
@@ -114,7 +114,7 @@ session_start();
           foreach($datas as $row) {
             $html .= " <div class=\"col-3\">
             <h3>".$row["cname"]."</h3>
-            <img src=\"".$row["imgs"]."\">
+            <img src=\"".$row["img"]."\">
             <p>Phone: $".$row["phone"]." </p>
             <p>Price: $".$row["price"]." </p>
             <button type=\"button\" onclick=\"openBox('" .$row["cid"]."','" .$row["cname"]."', ".$row["price"].")\";>Select

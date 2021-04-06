@@ -100,8 +100,8 @@ session_start();
 
                   if ($conn->connect_error) {die("Connection failed: " . $conn->connect_error);}
 
-                    $sql = "CREATE TABLE coffee(
-                      coffeeid VARCHAR(4) PRIMARY KEY NOT NULL,
+                    $sql = "CREATE TABLE COFFEE(
+                      coffeeid VARCHAR(4) PRIMARY KEY,
                       coffeeType VARCHAR(30) NOT NULL,
                       storeCode VARCHAR(20) NOT NULL,
                       img VARCHAR(30) NOT NULL,
@@ -172,8 +172,8 @@ $conn->close();
 
                               if ($conn->connect_error) {die("Connection failed: " . $conn->connect_error);}
 
-                                $sql = "CREATE TABLE flower(
-                                  flowerid VARCHAR(4) PRIMARY KEY NOT NULL,
+                                $sql = "CREATE TABLE FLOWER(
+                                  flowerid VARCHAR(4) PRIMARY KEY,
                                   flowerType VARCHAR(30) NOT NULL,
                                   storeCode VARCHAR(20) NOT NULL,
                                   img VARCHAR(30) NOT NULL,
@@ -182,7 +182,7 @@ $conn->close();
 
                               if($conn->query($sql) === TRUE){
 
-                              $sql = "INSERT INTO flower(flowerid, flowerType, storeCode, img, price)
+                              $sql = "INSERT INTO FLOWER(flowerid, flowerType, storeCode, img, price)
                               VALUES ('f1', 'Colorful Bouquet', 'a1', 'imgs/flowers.png', '10.00'),
                                     ('f2', 'White Lilies', 'b2', 'imgs/lilies.png', '13.00'),
                                     ('f3', 'Assorted Yellows', 'c3', 'imgs/yellowF.png', '13.00'),
@@ -372,13 +372,13 @@ $( "#set" ).click(function(e) {
 
                   // TO CREATE TABLE
                 $sql = "CREATE TABLE ITEMS (
-                PRODUCTID VARCHAR(4) PRIMARY KEY NOT NULL,
-                    USERID INT NOT NULL,
-                    SRC VARCHAR(50) NOT NULL,
-                    DEST VARCHAR(50) NOT NULL,
-                    DIST VARCHAR(5) NOT NULL,
-                    TM TIME NOT NULL,
-                    TYPE VARCHAR(4) NOT NULL
+                    productid VARCHAR(4) PRIMARY KEY,
+                    userid INT NOT NULL,
+                    src VARCHAR(50) NOT NULL,
+                    dest VARCHAR(50) NOT NULL,
+                    dist VARCHAR(5) NOT NULL,
+                    tm TIME NOT NULL,
+                    type VARCHAR(4) NOT NULL
                     )";
 
                 if($conn->query($sql) === TRUE){}
@@ -389,11 +389,11 @@ $( "#set" ).click(function(e) {
                 $dest = $_POST['destaddr'];
                 $dist = $_POST['distance'];
                 $tm = $_POST['time'];
-                $sql = "INSERT INTO ITEMS (PRODUCTID, USERID, SRC, DEST, DIST, TM, TYPE) VALUES ('$iid', '$uid', '$src', '$dest', '$dist', '$tm', 'sCB')";
+                $sql = "INSERT INTO ITEMS (productid, userid, src, dest, dist, tm, type) VALUES ('$iid', '$uid', '$src', '$dest', '$dist', '$tm', 'sCB')";
 
                 try {
                     if($conn->query($sql) === TRUE){
-                      $sql2 = "SELECT * FROM ITEMS WHERE USERID = '$uid' AND TYPE = 'sCB'";
+                      $sql2 = "SELECT * FROM ITEMS WHERE userid = '$uid' AND type = 'sCB'";
                       $check = $conn->query($sql2);
                       $num_rows = mysqli_num_rows($check);
 

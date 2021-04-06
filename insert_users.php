@@ -14,18 +14,18 @@
 
         $username = $_POST['username'];
         $pswrd = $_POST['pswrd'];
-        $first_name = $_POST['first_name'];
-        $last_name = $_POST['last_name'];
-        $tel_no = $_POST['tel_no'];
-        $mail_addr = $_POST['mail_addr'];
+        $first_name = $_POST['firstName'];
+        $last_name = $_POST['lastName'];
+        $tel_no = $_POST['telNo'];
+        $mail_addr = $_POST['mailAddr'];
         $email = $_POST['email'];
 
-        $sql = "INSERT INTO users (USERNAME, PSWRD, FIRST_NAME, LAST_NAME, TEL_NO, MAIL_ADDR, EMAIL)
+        $sql = "INSERT INTO users (username, pswrd, firstName, lastName, telNo, mailAddr, email)
                             VALUES ('$username', '$pswrd', '$first_name', '$last_name', '$tel_no', '$mail_addr', '$email')";
         
         try {
             if($conn->query($sql) === TRUE){
-               $sql = "SELECT * FROM users";
+               $sql = "SELECT * FROM USERS";
                $result = mysqli_query($conn, $sql);
 
                echo "<table>
@@ -45,15 +45,15 @@
                  if(mysqli_num_rows($result) > 0){
 
                    while($row = mysqli_fetch_assoc($result)){
-                       echo "<tr><td>" . $row["USERID"]
-                       .  " </td><td> " . $row["USERNAME"]
-                       .  " </td><td> " . $row["PSWRD"]
-                       .  " </td><td> " . $row["FIRST_NAME"]
-                       .  " </td><td> " . $row["LAST_NAME"]
-                        .  " </td><td> " . $row["TEL_NO"]
-                       .  " </td><td> " . $row["MAIL_ADDR"]
-                       .  " </td><td> " . $row["EMAIL"]
-                       .  " </td><td> " . $row["BALANCE"]
+                       echo "<tr><td>" . $row["userid"]
+                       .  " </td><td> " . $row["username"]
+                       .  " </td><td> " . $row["pswrd"]
+                       .  " </td><td> " . $row["firstName"]
+                       .  " </td><td> " . $row["lastName"]
+                        .  " </td><td> " . $row["telNo"]
+                       .  " </td><td> " . $row["mailAddr"]
+                       .  " </td><td> " . $row["email"]
+                       .  " </td><td> " . $row["balance"]
                        . " </td></tr><br>";
                    }
                    echo "</table>";

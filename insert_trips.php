@@ -20,7 +20,7 @@
         $price = $_POST['price'];
         $tm = $_POST['tm'];
 
-        $sql = "INSERT INTO trips(userid, carid, src, dest, dist, price, tm)
+        $sql = "INSERT INTO TRIPS(userid, carid, src, dest, dist, price, tm)
                               VALUES ('$userid', '$carid', '$src', '$dest', '$dist', '$price', '$tm')";
 
         try {
@@ -44,14 +44,14 @@
                  if(mysqli_num_rows($result) > 0){
 
                    while($row = mysqli_fetch_assoc($result)){
-                        echo "<tr><td>" . $row["TRIPID"]
-                       .  " </td><td> " . $row["USERID"]
-                       .  " </td><td> " . $row["CARID"]
-                       .  " </td><td> " . $row["SRC"]
-                       .  " </td><td> " . $row["DEST"]
-                       .  " </td><td> " . $row["DIST"]
-                       .  " </td><td> " . $row["PRICE"]
-                       .  " </td><td> " . $row["TM"]
+                        echo "<tr><td>" . $row["tripid"]
+                       .  " </td><td> " . $row["userid"]
+                       .  " </td><td> " . $row["carid"]
+                       .  " </td><td> " . $row["src"]
+                       .  " </td><td> " . $row["dest"]
+                       .  " </td><td> " . $row["dist"]
+                       .  " </td><td> " . $row["price"]
+                       .  " </td><td> " . $row["tm"]
                        . " </td></tr><br>";
                    }
                    echo "</table>";

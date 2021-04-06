@@ -81,15 +81,15 @@ session_start();
 
         // TO CREATE TABLE
         $sql = "CREATE TABLE CARS (
-          carid int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+          carid int PRIMARY KEY AUTO_INCREMENT,
           model VARCHAR(20) NOT NULL,
-          imgs VARCHAR(30) NOT NULL,
+          img VARCHAR(30) NOT NULL,
           price VARCHAR(5) NOT NULL,
           available BIT DEFAULT 1
           )";
 
     if($conn->query($sql) === TRUE){
-      $sql = "INSERT INTO cars (model, imgs, price)
+      $sql = "INSERT INTO cars (model, img, price)
       VALUES('Starex Minivan', 'imgs/StarexMinivan.png', '2.05'),
             ('Red Audi 2008', 'imgs/Audi.png', '1.35'),
             ('Honda 2004', 'imgs/2004.png', '0.95'),
@@ -116,7 +116,7 @@ session_start();
           foreach($datas as $row) {
             $html .= " <div class=\"col-3\">
             <h3>".$row["model"]."</h3>
-            <img src=\"".$row["imgs"]."\">
+            <img src=\"".$row["img"]."\">
             <p>Price: $".$row["price"]." </p>
             <p>(per km)</p>
             <button type=\"button\" onclick=\"openBox('" .$row["carid"]."','" .$row["model"]."', ".$row["price"].")\";>Select
@@ -271,15 +271,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST" )
 
         // TO CREATE TABLE
         $sql = "CREATE TABLE TRIPS (
-          TRIPID int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-          USERID INT NOT NULL,
-          CARID INT NOT NULL,
-          SRC VARCHAR(50) NOT NULL,
-          DEST VARCHAR(50) NOT NULL,
-          DIST VARCHAR(5) NOT NULL,
-          PRICE VARCHAR(5) NOT NULL,
-          TM TIME NOT NULL,
-          TYPE VARCHAR(4) NOT NULL
+          tripid int PRIMARY KEY AUTO_INCREMENT,
+          userid INT NOT NULL,
+          carid INT NOT NULL,
+          src VARCHAR(50) NOT NULL,
+          dest VARCHAR(50) NOT NULL,
+          dist VARCHAR(5) NOT NULL,
+          price VARCHAR(5) NOT NULL,
+          tm TIME NOT NULL,
+          type VARCHAR(4) NOT NULL
           )";
 
     if($conn->query($sql) === TRUE){}
@@ -292,11 +292,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST" )
     $price = ((float) $_POST['price']) * $check;
     $price2 = round($price, 2);
     $tm = $_POST['time'];
-    $sql = "INSERT INTO TRIPS (USERID, CARID, SRC, DEST, DIST, PRICE, TM, TYPE) VALUES ('$uid', '$cid', '$src', '$dest', '$dist', '$price2', '$tm', 'sCA')";
+    $sql = "INSERT INTO TRIPS (userid, carid, src, dest, dist, price, tm, type) VALUES ('$uid', '$cid', '$src', '$dest', '$dist', '$price2', '$tm', 'sCA')";
 
     try {
         if($conn->query($sql) === TRUE){
-         $sql2 = "SELECT * FROM TRIPS WHERE USERID = '$uid' AND TYPE = 'sCA'";
+         $sql2 = "SELECT * FROM TRIPS WHERE userid = '$uid' AND type = 'sCA'";
          $check = $conn->query($sql2);
          $num_rows = mysqli_num_rows($check);
 
