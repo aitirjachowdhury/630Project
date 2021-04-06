@@ -40,7 +40,7 @@ session_start();
       <button class="service2" onclick="window.location.href='serviceA.php';">Ride to a destination from this source</button><br>
       <button class="service2" onclick="window.location.href='serviceB.php';">Ride & Deliver an item from a store</button>
       <button class="service2" onclick="window.location.href='serviceC.php';">Ride Green</button>
-      <button class="service2" onclick="window.location.href='#';">Service D</button>
+      <button class="service2" onclick="window.location.href='serviceD.php';">Clean Green</button>
     </div>
 
     <?php
@@ -135,7 +135,7 @@ session_start();
               if(mysqli_num_rows($result) > 0){
                 $row = $result->fetch_assoc();
 
-                if($row["productid"] === ""){
+                if($row["productid"] === NULL){
                   $row["productid"] = "-";
                 }
 

@@ -55,8 +55,62 @@ session_start();
       if(isset($_SESSION['userid']))
       {
         $iuserid = (int) $_SESSION['userid'];
-        $_SESSION['total'] =0;
+        $_SESSION['total'] = 0;
 
+        if($_SESSION['service'] == "sD"){
+          // TO CREATE TABLE
+          $sql = "CREATE TABLE orderscl (
+            ordersclid int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+            userid INT NOT NULL,
+            cid INT NOT NULL,
+            src VARCHAR(50) NOT NULL,
+            dest VARCHAR(50) NOT NULL,
+            dist VARCHAR(5) NOT NULL,
+            price VARCHAR(5) NOT NULL,
+            tm TIME NOT NULL,
+            )";
+
+          if($conn->query($sql) === TRUE){}
+
+          # TO READ DATA
+          $sql = "SELECT cid, src, dest, dist, price FROM orderscl WHERE userid = $iuserid";
+          $result = mysqli_query($conn, $sql);
+          if(mysqli_num_rows($result) > 0){
+          while($row = mysqli_fetch_assoc($result)){
+          $datas[] = $row;}
+          }
+
+          # TO PRINT
+          if(count($datas) != 0){
+          $html = "";
+          foreach($datas as $row) {
+          $icleanerid = (int) $row['cid'];
+          $sql = "SELECT cname, imgs, price FROM cleaners WHERE cid = $icleanerid";
+
+          $result = $conn->query($sql);
+
+          if ($result->num_rows > 0) {
+            $row2 = $result->fetch_assoc();
+            $html .= " <tr>
+            <td>
+              <div class=\"cart-info\">
+              <img src=\"".$row2["imgs"]."\">
+              <div>
+              <p>".$row2["cname"]."</p>
+              <small>Price per day: $".$row2["price"]."</small>
+              </div>
+              </div>
+              </td>
+              <td>".$row["src"]."</td>
+              <td>".$row["dest"]."</td>
+              <td>".round($row["dist"],2)." km</td>
+              <td>$".$row["price"]."</td> </tr>
+              ";}
+
+              $_SESSION['total'] += $row["price"];}
+            echo $html;}
+        }
+        elseif($_SESSION['service'] == "sA"){
         // TO CREATE TABLE
         $sql = "CREATE TABLE TRIPS (
           TRIPID int PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -109,7 +163,9 @@ session_start();
 
             $_SESSION['total'] += $row["price"];}
           echo $html;}
+        }
 
+        elseif($_SESSION['service'] == "sB"){
         $datas = array();
 
       // TO CREATE TABLE
@@ -165,12 +221,12 @@ session_start();
 
           }
           echo $html;
+        }
       }
     }
       else {echo "<script>alert('Please Login to see items in cart!');window.location.href = \"signin.php\";</script>" ;}
 
         $conn -> close();
-
         ?>
         </table>
 
@@ -242,6 +298,7 @@ session_start();
                 orderid INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
                 userid INT NOT NULL,
                 tripid INT NOT NULL,
+                cleanerid INT NOT NULL,
                 productid VARCHAR(4),
                 date_issued DATE DEFAULT CURRENT_DATE()
                 )";
@@ -250,8 +307,10 @@ session_start();
 
           $itripid;
           $iproductid;
+          $icleanerid;
 
-          $sql = "SELECT TRIPID FROM TRIPS WHERE USERID = $iuserid";
+          if($_SESSION['service'] == "sA"){
+            $sql = "SELECT TRIPID FROM TRIPS WHERE USERID = $iuserid";
 
             $result = $conn->query($sql);
 
@@ -260,19 +319,7 @@ session_start();
               $itripid = $row["TRIPID"];
             }
 
-
-            $sql = "SELECT PRODUCTID FROM ITEMS WHERE USERID = $iuserid";
-
-            $result = $conn->query($sql);
-
-            if ($result->num_rows > 0) {
-              $row = $result->fetch_assoc();
-              $iproductid = $row["PRODUCTID"];
-            }
-
-
-            $sql = "INSERT INTO ORDERS (userid, tripid, productid) VALUES ('$iuserid', '$itripid', '$iproductid')";
-
+            $sql = "INSERT INTO ORDERS (userid, tripid) VALUES ('$iuserid', '$itripid')";
             try {
               if($conn->query($sql) === TRUE){
                 $sql = "SELECT orderid FROM ORDERS WHERE userid = $iuserid AND tripid = $itripid";
@@ -282,14 +329,87 @@ session_start();
                   $row = $result->fetch_assoc();
                   $iorderid = $row["orderid"];
                 }
-                $_SESSION['total'] = 0;
                 echo "<script>alert('Order Successful with Order ID: ".$iorderid."');window.location.href = \"index.php\";</script>" ;
+
+
+                $sql = "DELETE FROM trips";
+                if($conn->query($sql) === TRUE){}
+                
               } else {
                 throw new Exception("Something went wrong! Try again later.");
               }
           } catch (Exception $e) {
                 echo "<h2> ERROR: " . $e->getMessage() . "</h2>";
           }
+
+          }
+          elseif($_SESSION['service'] == "sB"){
+            $sql = "SELECT PRODUCTID FROM ITEMS WHERE USERID = $iuserid";
+
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+              $row = $result->fetch_assoc();
+              $iproductid = $row["PRODUCTID"];
+            }
+
+            $sql = "INSERT INTO ORDERS (userid, productid) VALUES ('$iuserid', '$iproductid')";
+
+            try {
+              if($conn->query($sql) === TRUE){
+                $sql = "SELECT orderid FROM ORDERS WHERE userid = $iuserid AND productid = '$iproductid'";
+                $iorderid;
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                  $row = $result->fetch_assoc();
+                  $iorderid = $row["orderid"];
+                }
+                echo "<script>alert('Order Successful with Order ID: ".$iorderid."');window.location.href = \"index.php\";</script>" ;
+
+                $sql = "DELETE FROM items";
+                if($conn->query($sql) === TRUE){}
+                  
+              } else {
+                throw new Exception("Something went wrong! Try again later.");
+              }
+          } catch (Exception $e) {
+                echo "<h2> ERROR: " . $e->getMessage() . "</h2>";
+          }
+          }
+
+          elseif($_SESSION['service'] == "sD"){
+            $sql = "SELECT cid FROM ORDERSCL WHERE userid = $iuserid";
+
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+              $row = $result->fetch_assoc();
+              $icleanerid = $row["cid"];
+            }
+
+            $sql = "INSERT INTO ORDERS (userid, cleanerid) VALUES ('$iuserid', '$icleanerid')";
+            try {
+              if($conn->query($sql) === TRUE){
+                $sql = "SELECT orderid FROM ORDERS WHERE userid = $iuserid AND cleanerid = $icleanerid";
+                $iorderid;
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                  $row = $result->fetch_assoc();
+                  $iorderid = $row["orderid"];
+                }
+                echo "<script>alert('Order Successful with Order ID: ".$iorderid."');window.location.href = \"index.php\";</script>" ;
+
+                $sql = "DELETE FROM orderscl";
+                if($conn->query($sql) === TRUE){}    
+                  
+              } else {
+                throw new Exception("Something went wrong! Try again later.");
+              }
+          } catch (Exception $e) {
+                echo "<h2> ERROR: " . $e->getMessage() . "</h2>";
+          }
+          }
+
           $conn->close();
 
           }
