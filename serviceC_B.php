@@ -342,10 +342,7 @@ $( "#set" ).click(function(e) {
             ev.target.appendChild(document.getElementById(data));
             $('#flowerid').val(data);
             count++;
-            if (count > 1 ){
-              alert("Cart Full! Proceed to checkout. ");
-              openBox();
-            }
+            openBox();
           }
         </script>
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDx5lbrMhv8DOYOGxWQavDHU0ZmBT2P-g8&callback=initMap"></script>

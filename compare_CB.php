@@ -18,7 +18,6 @@ session_start();
       <div class="underline"></div>
         <div class="small-container">
           <div class="row">
-            <div class="col-3">
               <?php
                  $servername = "localhost";
                  $username = "root";
@@ -55,25 +54,22 @@ session_start();
 
                             if ($result->num_rows > 0) {
                                 $row2 = $result->fetch_assoc();
-                                $html .= " <tr>
-                                <td>
+                                $html .= "
                                 <div class=\"col-3\">
                                 <img src=\"".$row2["img"]."\">
-                                <p>".$row2["flowerType"]."</p>
-                                <small>Price per km: $".$row2["price"]."</small>
-                                </td><br>
-                                <td>Source: ".$row["src"]."</td><br>
-                                <td>Destination: ".$row["dest"]."</td><br>
-                                <td>Distance: ".round($row["dist"],2)." km</td><br>
-                                <td>Total: $".$row2["price"]."</td><br>
-                                <button>Remove</button> </tr></div>";}
-                                echo $html; 
+                                <h3>".$row2["flowerType"]."</h3><br>
+                                <small>Price per km: $".$row2["price"]."</small><br>
+                                <small>Source: ".$row["src"]."</small><br>
+                                <small>Destination: ".$row["dest"]."</small><br>
+                                <small>Distance: ".round($row["dist"],2)." km</small><br>
+                                <small>Total: $".$row2["price"]."</small><br>
+                                <button>Remove</button></div>";}
                             } 
+                            echo $html; 
                         }
                       }
                   $conn -> close();
               ?>
-            </div>
         </div>
        </div>
       </div>
