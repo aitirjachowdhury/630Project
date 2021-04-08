@@ -40,6 +40,9 @@
             <option value="ORDERS">Orders</option>
             <option value="TRIPS">Trips</option>
             <option value="USERS">Users</option>
+            <option value ="CLEANERS">Cleaners</option>
+            <option value ="ORDERSCL">Cleaners Orders</option>
+            <option value ="REVIEWS">Reviews</option>
           </select>
         <label for="option"> Options: </label>
           <select name="option">
@@ -323,6 +326,118 @@
                 }
              }
 
+             //CLEANERS TABLE VIEW
+             elseif ($_POST['table'] === "CLEANERS" && $_POST['option'] === "view"){
+
+                $sql = "SELECT * FROM CLEANERS";
+                $result = mysqli_query($conn, $sql);
+
+                echo "<table>
+                        <tr>
+                        <th>CLEANER ID</th>
+                        <th>NAME</th>
+                        <th>PHONE NO.</th>
+                        <th>IMAGES</th>
+                        <th>PRICE</th>
+                        <th>AVAILABILITY</th>
+                        </tr>";
+
+                try {
+                  if(mysqli_num_rows($result) > 0){
+
+                    while($row = mysqli_fetch_assoc($result)){
+                        echo "<tr> <td>" . $row["cid"]
+                        .  " </td><td> " . $row["cname"]
+                        .  " </td><td> " . $row["phone"]
+                        .  " </td><td> " . $row["img"]
+                        .  " </td><td> " . $row["price"]
+                        .  " </td><td> " . $row["available"]
+                        . " </td></tr><br>";
+                    }
+                    echo "</table>";
+                  } else {
+                      throw new Exception("No Records Found");
+                  }
+                } catch (Exception $e) {
+                  echo "<h2> ERROR: " . $e->getMessage() . "</h2>";
+                }
+
+             }
+
+             //CLEANERS ORDERS TABLE VIEW
+             elseif ($_POST['table'] === "ORDERSCL" && $_POST['option'] === "view"){
+
+                $sql = "SELECT * FROM ORDERSCL";
+                $result = mysqli_query($conn, $sql);
+
+                echo "<table>
+                        <tr>
+                        <th>CLEANER ID</th>
+                        <th>USER ID</th>
+                        <th>SOURCE</th>
+                        <th>DESTINATION</th>
+                        <th>DISTANCE</th>
+                        <th>PRICE</th>
+                        <th>TIME</th>
+                        </tr>";
+
+                try {
+                  if(mysqli_num_rows($result) > 0){
+
+                    while($row = mysqli_fetch_assoc($result)){
+                        echo "<tr> <td>" . $row["cid"]
+                        .  " </td><td> " . $row["userid"]
+                        .  " </td><td> " . $row["src"]
+                        .  " </td><td> " . $row["dest"]
+                        .  " </td><td> " . $row["dist"]
+                        .  " </td><td> " . $row["price"]
+                        .  " </td><td> " . $row["tm"]
+                        . " </td></tr><br>";
+                    }
+                    echo "</table>";
+                  } else {
+                      throw new Exception("No Records Found");
+                  }
+                } catch (Exception $e) {
+                  echo "<h2> ERROR: " . $e->getMessage() . "</h2>";
+                }
+
+             }
+
+             //REVIEWS TABLE VIEW
+             elseif ($_POST['table'] === "REVIEWS" && $_POST['option'] === "view"){
+
+                $sql = "SELECT * FROM REVIEWS";
+                $result = mysqli_query($conn, $sql);
+
+                echo "<table>
+                        <tr>
+                        <th>REVIEW ID</th>
+                        <th>SERVICE TYPE</th>
+                        <th>RATING</th>
+                        <th>REVIEW</th>
+                        </tr>";
+
+                try {
+                  if(mysqli_num_rows($result) > 0){
+
+                    while($row = mysqli_fetch_assoc($result)){
+                        echo "<tr> <td>" . $row["reviewid"]
+                        .  " </td><td> " . $row["serviceType"]
+                        .  " </td><td> " . $row["rating"]
+                        .  " </td><td> " . $row["review"]
+                        . " </td></tr><br>";
+                    }
+                    echo "</table>";
+                  } else {
+                      throw new Exception("No Records Found");
+                  }
+                } catch (Exception $e) {
+                  echo "<h2> ERROR: " . $e->getMessage() . "</h2>";
+                }
+
+             }
+
               //INSERT VALUES INTO CARS TABLE
               elseif ($_POST['table'] === "CARS" && $_POST['option'] === "insert")
               {
@@ -474,6 +589,67 @@
 
               }
 
+              else if ($_POST['table'] === "CLEANERS" && $_POST['option'] === "insert"){
+                  echo "<div>
+                  <form class='insert' method='post' action='insert_cleaner.php'>
+
+                    <label for='cname'> Name: </label>
+                    <input type='text' name='cname' id='insertForm'></input>
+                    <label for='phone'> Phone No: </label>
+                    <input type='text' name='phone' id='insertForm'></input>
+                    <label for='img'> Image: </label>
+                    <input type='text' name='img' id='insertForm'></input>
+                    <label for='price'> Price: </label>
+                    <input type='text' name='price' id='insertForm'></input>
+
+                    <input type='submit' name='insert' value='Insert Data'>
+                  </form>
+                </div>";
+
+              }
+
+              else if ($_POST['table'] === "ORDERSCL" && $_POST['option'] === "insert"){
+                  echo "<div>
+                  <form class='insert' method='post' action='insert_cleaner_order.php'>
+
+                    <label for='cid'> Cleaner ID: </label>
+                    <input type='text' name='cid' id='insertForm'></input>
+                    <label for='userid'> User ID: </label>
+                    <input type='text' name='userid' id='insertForm'></input>
+                    <label for='src'> Source: </label>
+                    <input type='text' name='src' id='insertForm'></input>
+                    <label for='dest'> Destination: </label>
+                    <input type='text' name='dest' id='insertForm'></input>
+                    <label for='dist'> Distance: </label>
+                    <input type='text' name='dist' id='insertForm'></input>
+                    <label for='price'> Price: </label>
+                    <input type='text' name='price' id='insertForm'></input>
+                    <label for='tm'> Time: </label>
+                    <input type='time' name='tm' id='insertForm'></input>
+
+                    <input type='submit' name='insert' value='Insert Data'>
+                  </form>
+                </div>";
+
+              }
+
+              else if ($_POST['table'] === "REVIEWS" && $_POST['option'] === "insert"){
+                  echo "<div>
+                  <form class='insert' method='post' action='insert_review.php'>
+
+                    <label for='serviceType'> Service Type: </label>
+                    <input type='text' name='serviceType' id='insertForm'></input>
+                    <label for='rating'> Rating: </label>
+                    <input type='text' name='rating' id='insertForm'></input>
+                    <label for='review'> Review: </label>
+                    <input type='text' name='review' id='insertForm'></input>
+
+                    <input type='submit' name='insert' value='Insert Data'>
+                  </form>
+                </div>";
+
+              }
+
               //DELETE Operation
               else if ($_POST['table'] === "CARS" && $_POST['option'] === "delete"){
                 echo "<div>
@@ -551,6 +727,42 @@
                 </form>
                 </div>";
               }
+
+              else if ($_POST['table'] === "CLEANERS" && $_POST['option'] === "delete"){
+                echo "<div>
+                <form class='insert' method='post' action='delete_cleaner.php'>
+                    <label for='cid'> Cleaner ID: </label>
+                    <input type='text' name='cid' id='insertForm'></input>
+
+                    <input type='submit' name='insert' value='Delete Data'>
+                </form>
+                </div>";
+              }
+
+              else if ($_POST['table'] === "ORDERSCL" && $_POST['option'] === "delete"){
+                echo "<div>
+                <form class='insert' method='post' action='delete_cleaner_order.php'>
+                    <label for='cid'> Cleaner ID: </label>
+                    <input type='text' name='cid' id='insertForm'></input>
+                    <label for='userid'> User ID: </label>
+                    <input type='text' name='userid' id='insertForm'></input>
+
+                    <input type='submit' name='insert' value='Delete Data'>
+                </form>
+                </div>";
+              }
+
+              else if ($_POST['table'] === "REVIEWS" && $_POST['option'] === "delete"){
+                echo "<div>
+                <form class='insert' method='post' action='delete_review.php'>
+                    <label for='reviewid'> Review ID: </label>
+                    <input type='text' name='reviewid' id='insertForm'></input>
+
+                    <input type='submit' name='insert' value='Delete Data'>
+                </form>
+                </div>";
+              }
+
               //UPDATE Operation
               else if ($_POST['table'] === "CARS" && $_POST['option'] === "update"){
                 echo "<div>
@@ -681,6 +893,61 @@
                 </form>
                 </div>";
               }
+
+              else if ($_POST['table'] === "CLEANERS" && $_POST['option'] === "update"){
+                echo "<div>
+                <form method='post' action='update_cleaner.php'>
+                <label for='cid'> Cleaner ID: </label>
+                <input type='text' name='cid' id='insertForm'></input>
+                <select name='cleaners' style='width:200px;'>
+                <option value='cname'>Name</option>
+                <option value='phone'>Phone No.</option>
+                <option value='price'>Price</option>
+                <option value='available'>Availability</option>
+                </select>
+                <label for='val'> Value: </label>
+                <input type='text' name='val' id='insertForm'></input>
+                <input type='submit' name='update' value='Update Data'>
+                </form>
+                </div>";
+              }
+
+              else if ($_POST['table'] === "ORDERSCL" && $_POST['option'] === "update"){
+                echo "<div>
+                <form method='post' action='update_cleaner_order.php'>
+                <label for='cid'> Cleaner ID: </label>
+                <input type='text' name='cid' id='insertForm'></input>
+                <select name='orderscl' style='width:200px;'>
+                <option value='userid'>User ID</option>
+                <option value='src'>Source</option>
+                <option value='dest'>Destination</option>
+                <option value='dist'>Distance</option>
+                <option value='price'>Price</option>
+                </select>
+                <label for='val'> Value: </label>
+                <input type='text' name='val' id='insertForm'></input>
+                <input type='submit' name='update' value='Update Data'>
+                </form>
+                </div>";
+              }
+
+              else if ($_POST['table'] === "REVIEWS" && $_POST['option'] === "update"){
+                echo "<div>
+                <form method='post' action='update_review.php'>
+                <label for='reviewid'> Review ID: </label>
+                <input type='text' name='reviewid' id='insertForm'></input>
+                <select name='reviews' style='width:200px;'>
+                <option value='serviceType'>Service Type</option>
+                <option value='rating'>Rating</option>
+                <option value='review'>Review</option>
+                </select>
+                <label for='val'> Value: </label>
+                <input type='text' name='val' id='insertForm'></input>
+                <input type='submit' name='update' value='Update Data'>
+                </form>
+                </div>";
+              }
+
               else {
                 echo "Invalid Selection";
               }
