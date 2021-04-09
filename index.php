@@ -135,7 +135,7 @@ session_start();
               if(mysqli_num_rows($result) > 0){
                 $row = $result->fetch_assoc();
 
-                if($row["tripid"] != 0){
+                if($row["tripid"] != NULL){
                   echo "<script>
                   var textb = document.getElementById(\"searchresult\");
                   textb.innerHTML = 'Order ID: " . $row["orderid"]."<br>Trip ID: " . $row["tripid"]."<br>Date issued: " . $row["date_issued"]."';
@@ -149,7 +149,7 @@ session_start();
                   textb.style.display = \"block\";
                   </script>";}
 
-                elseif($row["cleanerid"] != 0){
+                elseif($row["cleanerid"] != NULL){
                   echo "<script>
                   var textb = document.getElementById(\"searchresult\");
                   textb.innerHTML = 'Order ID: " . $row["orderid"]."<br>Cleaner ID: " . $row["orderid"]."<br>Date issued: " . $row["date_issued"]."';

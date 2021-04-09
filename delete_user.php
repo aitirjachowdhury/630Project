@@ -14,7 +14,7 @@
 
         $userid = $_POST['userid'];
 
-        $sql = "DELETE FROM users WHERE USERID = '$userid'";
+        $sql = "DELETE FROM users WHERE userid = '$userid'";
 
         try {
             if($conn->query($sql) === TRUE){

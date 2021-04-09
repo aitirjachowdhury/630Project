@@ -14,7 +14,7 @@
 
         $tripid = $_POST['tripid'];
 
-        $sql = "DELETE FROM TRIPS WHERE TRIPID = '$tripid'";
+        $sql = "DELETE FROM TRIPS WHERE tripid = '$tripid'";
 
         try {
             if($conn->query($sql) === TRUE){

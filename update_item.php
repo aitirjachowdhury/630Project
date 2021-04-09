@@ -16,7 +16,7 @@
         $change = $_POST['items'];
         $value = $_POST['val'];
         
-        $sql = "UPDATE ITEMS SET $change = '$value' WHERE PRODUCTID = '$productid'";
+        $sql = "UPDATE ITEMS SET $change = '$value' WHERE productid = '$productid'";
 
         try {
             if($conn->query($sql) === TRUE){

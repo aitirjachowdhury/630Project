@@ -296,6 +296,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" )
 
     try {
         if($conn->query($sql) === TRUE){
+
          $sql2 = "SELECT * FROM TRIPS WHERE userid = '$uid' AND type = 'sCA'";
          $check = $conn->query($sql2);
          $num_rows = mysqli_num_rows($check);

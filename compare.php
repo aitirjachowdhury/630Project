@@ -47,13 +47,14 @@ session_start();
           $html = "";
           foreach($datas as $row) {
             $icarid = (int) $row['carid'];
-            $itripid = $row['tripid'];
+
             $sql = "SELECT model, img, price FROM CARS WHERE carid = $icarid";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
             $row2 = $result->fetch_assoc(); 
-            $html .= " <div class=\"col-3\">
+            $html .= " 
+            <div class=\"col-3\">
             <img src=\"".$row2["img"]."\">
             <h3>".$row2["model"]."</h3><br>
             <small>Price per km: $".$row2["price"]."</small><br>
@@ -61,16 +62,41 @@ session_start();
             <small>Destination: ".$row["dest"]."</small><br>
             <small>Distance: ".round($row["dist"],2)." km</small><br>
             <small>Total: $".$row["price"]."</small><br>
-            <button>Remove</button></div>";}
+            <form id='".$row2["model"]."' method='post'>
+            <input type='hidden' name='carID' value='".$icarid."'>
+            <button name='submit1' onclick='rmFunction(\"".$row2["model"]."\")'>Remove</button>
+            </form>
+            </div>";}
           } 
           echo $html;
-        } }
-
-                 $conn -> close();
+        }
+      }
               ?>
 
         </div>
        </div>
       </div>
+
+
+        <script>
+        function rmFunction(x) {
+         document.getElementById(x).submit();
+        }
+
+        </script>
+
+<?php
+
+if (isset($_POST['submit1'])) {
+        $_SESSION['service'] = "sCA";
+        $icarid = (int) $_POST['carID'];
+                $sql = "DELETE FROM TRIPS WHERE carid = $icarid";
+                if($conn->query($sql) === TRUE){
+                  header('Location: cart.php');
+                }
+        
+        }
+        $conn -> close();
+      ?>
     </body>
 </html>

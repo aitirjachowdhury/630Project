@@ -109,7 +109,7 @@ session_start();
               $_SESSION['total'] += $row["price"];}
             echo $html;}
         }
-        elseif($_SESSION['service'] == "sA"){
+        elseif($_SESSION['service'] == "sA" || $_SESSION['service'] == "sCA"){
         // TO CREATE TABLE
         $sql = "CREATE TABLE TRIPS (
           tripid int PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -164,9 +164,8 @@ session_start();
           echo $html;}
         }
 
-        elseif($_SESSION['service'] == "sB"){
+        elseif($_SESSION['service'] == "sB" || $_SESSION['service'] == "sCB"){
         $datas = array();
-
       // TO CREATE TABLE
       $sql = "CREATE TABLE ITEMS (
       productid VARCHAR(4) PRIMARY KEY,
@@ -194,6 +193,9 @@ session_start();
           $html = "";
           foreach($datas as $row) {
             $key2 = $row["productid"];
+
+
+            if($key2[0] == 'f'){
             $sql = "SELECT * FROM FLOWER WHERE flowerid = '$key2'";
 
             $result = $conn->query($sql);
@@ -206,7 +208,7 @@ session_start();
                 <img src=\"".$row2["img"]."\">
                 <div>
                 <p>".$row2["flowerType"]."</p>
-                <small>Price per km: $".$row2["price"]."</small>
+                <small>Price: $".$row2["price"]."</small>
                 </div>
                 </div>
             </td>
@@ -215,6 +217,31 @@ session_start();
             <td>".round($row["dist"],2)." km</td>
             <td>$".$row2["price"]."</td> </tr>
             ";}
+            }
+            elseif($key2[0] == 'c'){
+              $sql = "SELECT * FROM COFFEE WHERE coffeeid = '$key2'";
+
+              $result = $conn->query($sql);
+  
+              if ($result->num_rows > 0) {
+                $row2 = $result->fetch_assoc();
+              $html .= " <tr>
+              <td>
+                  <div class=\"cart-info\">
+                  <img src=\"".$row2["img"]."\">
+                  <div>
+                  <p>".$row2["coffeeType"]."</p>
+                  <small>Price: $".$row2["price"]."</small>
+                  </div>
+                  </div>
+              </td>
+              <td>".$row["src"]."</td>
+              <td>".$row["dest"]."</td>
+              <td>".round($row["dist"],2)." km</td>
+              <td>$".$row2["price"]."</td> </tr>
+              ";}
+            }
+
 
             $_SESSION['total'] += $row2["price"];
 
@@ -289,15 +316,14 @@ session_start();
 
           $conn = new mysqli($servername, $username, $pswrd, $dbname);
 
-
           if ($conn->connect_error) {die("Connection failed: " . $conn->connect_error);}
 
               // TO CREATE TABLE
             $sql = "CREATE TABLE ORDERS(
                 orderid INT PRIMARY KEY AUTO_INCREMENT,
                 userid INT NOT NULL,
-                tripid INT NOT NULL,
-                cleanerid INT NOT NULL,
+                tripid INT,
+                cleanerid INT,
                 productid VARCHAR(4),
                 date_issued DATE DEFAULT CURRENT_DATE()
                 )";
@@ -308,7 +334,7 @@ session_start();
           $iproductid;
           $icleanerid;
 
-          if($_SESSION['service'] == "sA"){
+          if($_SESSION['service'] == "sA" || $_SESSION['service'] == "sCA" ){
             $sql = "SELECT tripid FROM TRIPS WHERE userid = $iuserid";
 
             $result = $conn->query($sql);
@@ -342,7 +368,7 @@ session_start();
           }
 
           }
-          elseif($_SESSION['service'] == "sB"){
+          elseif($_SESSION['service'] == "sB"  || $_SESSION['service'] == "sCB"){
             $sql = "SELECT productid FROM ITEMS WHERE userid = $iuserid";
 
             $result = $conn->query($sql);

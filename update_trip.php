@@ -16,7 +16,7 @@
         $change = $_POST['trips'];
         $value = $_POST['val'];
         
-        $sql = "UPDATE TRIPS SET $change = '$value' WHERE TRIPID = $tripid";
+        $sql = "UPDATE TRIPS SET $change = '$value' WHERE tripid = $tripid";
 
         try {
             if($conn->query($sql) === TRUE){

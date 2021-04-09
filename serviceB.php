@@ -371,7 +371,7 @@ $( "#set" ).click(function(e) {
 
                   // TO CREATE TABLE
                 $sql = "CREATE TABLE ITEMS (
-                    productid VARCHAR(4) PRIMARY KEY NOT NULL,
+                    productid VARCHAR(4) PRIMARY KEY,
                     userid INT NOT NULL,
                     src VARCHAR(50) NOT NULL,
                     dest VARCHAR(50) NOT NULL,

@@ -48,30 +48,80 @@ session_start();
                         $html = "";
                         foreach($datas as $row) {
                             $key2 = $row["productid"];
+
+                            if($key2[0] == 'f'){
+
                             $sql = "SELECT * FROM FLOWER WHERE flowerid = '$key2'";
 
                             $result = $conn->query($sql);
 
                             if ($result->num_rows > 0) {
                                 $row2 = $result->fetch_assoc();
-                                $html .= "
+                                $html .= " 
                                 <div class=\"col-3\">
                                 <img src=\"".$row2["img"]."\">
                                 <h3>".$row2["flowerType"]."</h3><br>
-                                <small>Price per km: $".$row2["price"]."</small><br>
+                                <small>Price: $".$row2["price"]."</small><br>
                                 <small>Source: ".$row["src"]."</small><br>
                                 <small>Destination: ".$row["dest"]."</small><br>
                                 <small>Distance: ".round($row["dist"],2)." km</small><br>
-                                <small>Total: $".$row2["price"]."</small><br>
-                                <button>Remove</button></div>";}
-                            } 
+                                <form id='".$row2["flowerType"]."' method='post'>
+                                <input type='hidden' name='productID' value='".$key2."'>
+                                <button name='submit1' onclick='rmFunction(\"".$row2["flowerType"]."\")'>Remove</button>
+                                </form>
+                                </div>";}
+                            }
+                            elseif($key2[0] == 'c'){
+                              $sql = "SELECT * FROM COFFEE WHERE coffeeid = '$key2'";
+
+                              $result = $conn->query($sql);
+  
+                              if ($result->num_rows > 0) {
+                                  $row2 = $result->fetch_assoc();
+                                  $html .= " 
+                                  <div class=\"col-3\">
+                                  <img src=\"".$row2["img"]."\">
+                                  <h3>".$row2["coffeeType"]."</h3><br>
+                                  <small>Price: $".$row2["price"]."</small><br>
+                                  <small>Source: ".$row["src"]."</small><br>
+                                  <small>Destination: ".$row["dest"]."</small><br>
+                                  <small>Distance: ".round($row["dist"],2)." km</small><br>
+                                  <form id='".$row2["coffeeType"]."' method='post'>
+                                  <input type='hidden' name='productID' value='".$key2."'>
+                                  <button name='submit1' onclick='rmFunction(\"".$row2["coffeeType"]."\")'>Remove</button>
+                                  </form>
+                                  </div>";}
+                          }
+                        } 
                             echo $html; 
                         }
                       }
-                  $conn -> close();
-              ?>
+
+?>
         </div>
        </div>
       </div>
+
+
+      
+      <script>
+        function rmFunction(x) {
+         document.getElementById(x).submit();
+        }
+
+        </script>
+
+<?php
+
+if (isset($_POST['submit1'])) {
+          $_SESSION['service'] = "sCB";
+          $productid = $_POST['productID'];
+                $sql = "DELETE FROM ITEMS WHERE productid = '$productid'";
+                if($conn->query($sql) === TRUE){
+                  header('Location: cart.php');
+                }
+        }
+        $conn -> close();
+      ?>
     </body>
 </html>
