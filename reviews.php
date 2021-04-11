@@ -1,7 +1,4 @@
-<?php
-ob_start();
-session_start();
- ?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -148,6 +145,9 @@ session_start();
                       </div>
                     -->
                       <br>
+                      <label for="orderid">Enter OrderID: </label>
+                      <input type="text" name="orderid">
+                      <br>
                       <textarea name="review" rows="8" cols="80" placeholder="Something else you want to say (optional)"></textarea>
                       <button type="submit" name="button" style="margin-bottom:20px; margin-left:35%" >Submit Review</button>
                     </form>
@@ -211,188 +211,171 @@ session_start();
                     }
 
                 </script>
+                <br><br><br>
 
-                            <?php
-                            $servername = "localhost";
-                            $username = "root";
-                            $password = "";
-                            $dbname = "services";
-                            // Create connection
-                            $conn = new mysqli($servername, $username, $password, $dbname);
-                            // Check connection
-                            if ($conn->connect_error) {
-                              die("Connection failed: " . $conn->connect_error);
-                            }
+                <?php
+                $servername = "localhost";
+                $username = "root";
+                $password = "";
+                $dbname = "services";
+                // Create connection
+                $conn = new mysqli($servername, $username, $password, $dbname);
+                // Check connection
+                if ($conn->connect_error) {
+                  die("Connection failed: " . $conn->connect_error);
+                }
 
-                            // TO CREATE TABLE
-                            $sql = "CREATE TABLE REVIEWS (
-                              reviewid int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-                              serviceType VARCHAR(50) NOT NULL,
-                              rating INT NOT NULL,
-                              review VARCHAR(250) NOT NULL
-                              )";
-                            if($conn->query($sql) === TRUE){
-                              $sql = "INSERT INTO REVIEWS (serviceType, rating, review)
-                                      VALUES ('A', 5, 'EXCELLENT!'),
-                                            ('B', 5, 'EXCELLENT!'),
-                                            ('C', 5, 'EXCELLENT!'),
-                                            ('D', 5, 'EXCELLENT!')";
-                            if ($conn->query($sql) === true) {}}
+                // TO CREATE TABLE
+                $sql = "CREATE TABLE REVIEWS (
+                reviewid int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+                serviceType VARCHAR(50) NOT NULL,
+                rating INT NOT NULL,
+                review VARCHAR(250) NOT NULL,
+                orderid VARCHAR(11))";
 
-                            $serviceType = $_POST['service'];
-                            $rating = $_POST['rating'];
-                            $review = $_POST['review'];
+                if($conn->query($sql) === TRUE){
+                $sql = "INSERT INTO REVIEWS (serviceType, rating, review)
+                VALUES ('A', 5, 'EXCELLENT!'),
+                    ('B', 5, 'EXCELLENT!'),
+                    ('C', 5, 'EXCELLENT!'),
+                    ('D', 5, 'EXCELLENT!')";
+                if ($conn->query($sql) === true) {}}
 
-                            $sql = "INSERT INTO REVIEWS(serviceType, rating, review)
-                            VALUES ('$serviceType', '$rating', '$review')";
+                $serviceType = $_POST['service'];
+                $rating = $_POST['rating'];
+                $review = $_POST['review'];
+                $orderid = $_POST['orderid'];
 
-                            if($conn->query($sql) === TRUE){header('Location: reviews.php');}
+                $sql = "INSERT INTO REVIEWS(serviceType, rating, review, orderid)
+                VALUES ('$serviceType', '$rating', '$review', '$orderid')";
 
-                                    //For Service A
-                                    $sql = "SELECT serviceType, rating
-                                            FROM REVIEWS
-                                            WHERE serviceType = 'A'
-                                            ";
-                                    $result = mysqli_query($conn, $sql);
-                                    if(mysqli_num_rows($result) > 0){
-                                      while($row = mysqli_fetch_assoc($result)){
-                                        $datasA[] = $row;
-                                      }
-                                    }
-                                    if(count($datasA) != 0){
-                                      foreach($datasA as $row) {
-                                        $sumA += $row["rating"];
-                                    }
-                                    $avgA = $sumA / count($datasA);
-                                  }
+                if($conn->query($sql) === TRUE){
 
+                $sql="SELECT orderid, rating FROM REVIEWS";
+                $result = mysqli_query($conn, $sql);
+                if(mysqli_num_rows($result) > 0){
+                  while($review_row = mysqli_fetch_assoc($result)){
+                    $review_datas[] = $review_row;
+                  }
+                }
+                $sql = "SELECT orderid, productid FROM ORDERS";
+                $result = mysqli_query($conn, $sql);
+                if(mysqli_num_rows($result) > 0){
+                  while($order_row = mysqli_fetch_assoc($result)){
+                    $order_datas[] = $order_row;
+                  }
+                }
 
-                                  //For Service B
-                                  $sql = "SELECT serviceType, rating
-                                          FROM REVIEWS
-                                          WHERE serviceType = 'B'
-                                          ";
-                                  $result = mysqli_query($conn, $sql);
-                                  if(mysqli_num_rows($result) > 0){
-                                    while($row = mysqli_fetch_assoc($result)){
-                                      $datasB[] = $row;
-                                    }
-                                  }
-                                  if(count($datasB) != 0){
-                                    foreach($datasB as $row) {
-                                      $sumB += $row["rating"];
-                                  }
-                                  $avgB = $sumB / count($datasB);
-                                }
+                if(count($review_datas) != 0 && count($order_datas) != 0){
+                  foreach ($order_datas as $order_row){
+                    //echo "orderid from Orders: " . $order_row["orderid"];
+                    foreach ($review_datas as $review_row){
+                      //echo "Reviews: " . $review_row["orderid"] . " ";
+                      if($review_row["orderid"] == $order_row["orderid"]){
+                          //echo "orderid from Orders: " . $order_row["orderid"];
+                          //echo "Reviews: " . $review_row["orderid"] . " ";
+                          $productid = $order_row["productid"];
+                          //echo $order_row["productid"];
+                        }
+                      }
+                  }
+                }
+                $sql = "SELECT rating FROM FLOWER WHERE flowerid = '$productid'";
+                    $result = mysqli_query($conn, $sql);
+                    if(mysqli_num_rows($result) > 0){
+                      while($flower_row = mysqli_fetch_assoc($result)){
+                        $flower_datas[] = $flower_row;
+                      }
+                    }
+                    if(count($flower_datas) != 0){
+                      foreach($flower_datas as $flower_row) {
+                        $flower += $flower_row["rating"];
+                      }
+                      $flower += $review_row['rating'];
+                      //$avg_flower = $flower / count($flower_datas);
+                      $avg_flower = $flower / 2;
+                    }
+                $sql1 = "UPDATE FLOWER SET rating='$avg_flower' WHERE flowerid='$productid'";
+                //echo $sql1;
+                if ($conn->query($sql1) === true){}
 
+                header('Location: reviews.php');
+              }
 
-                                //For Service C
-                                $sql = "SELECT serviceType, rating
-                                        FROM REVIEWS
-                                        WHERE serviceType = 'C'
-                                        ";
-                                $result = mysqli_query($conn, $sql);
-                                if(mysqli_num_rows($result) > 0){
-                                    while($row = mysqli_fetch_assoc($result)){
-                                      $datasC[] = $row;
-                                    }
-                                  }
-                                  if(count($datasC) != 0){
-                                    foreach($datasC as $row) {
-                                      $sumC += $row["rating"];
-                                  }
-                                  $avgC = $sumC/ count($datasC);
-                                }
+                //For Service A
+                $sql = "SELECT serviceType, rating
+                FROM REVIEWS
+                WHERE serviceType = 'A'";
+                $result = mysqli_query($conn, $sql);
+                if(mysqli_num_rows($result) > 0){
+                  while($row = mysqli_fetch_assoc($result)){
+                    $datasA[] = $row;
+                  }
+                }
+                if(count($datasA) != 0){
+                  foreach($datasA as $row) {
+                    $sumA += $row["rating"];
+                  }
+                  $avgA = $sumA / count($datasA);
+                }
+                //For Service B
+                $sql = "SELECT serviceType, rating
+                FROM REVIEWS
+                WHERE serviceType = 'B'";
+                $result = mysqli_query($conn, $sql);
+                if(mysqli_num_rows($result) > 0){
+                  while($row = mysqli_fetch_assoc($result)){
+                    $datasB[] = $row;
+                  }
+                }
+                if(count($datasB) != 0){
+                  foreach($datasB as $row) {
+                    $sumB += $row["rating"];
+                  }
+                  $avgB = $sumB / count($datasB);
+                }
+                //For Service C
+                $sql = "SELECT serviceType, rating
+                FROM REVIEWS
+                WHERE serviceType = 'C'";
+                $result = mysqli_query($conn, $sql);
+                if(mysqli_num_rows($result) > 0){
+                  while($row = mysqli_fetch_assoc($result)){
+                    $datasC[] = $row;
+                  }
+                }
+                if(count($datasC) != 0){
+                  foreach($datasC as $row) {
+                    $sumC += $row["rating"];
+                  }
+                  $avgC = $sumC/ count($datasC);
+                }
+                //For Service D
+                $sql = "SELECT serviceType, rating
+                FROM REVIEWS
+                WHERE serviceType = 'D'";
+                $result = mysqli_query($conn, $sql);
+                if(mysqli_num_rows($result) > 0){
+                  while($row = mysqli_fetch_assoc($result)){
+                    $datasD[] = $row;
+                  }
+                }
+                if(count($datasD) != 0){
+                  foreach($datasD as $row) {
+                    $sumD += $row["rating"];
+                  }
+                  $avgD = $sumD / count($datasD);
+                }
 
-
-                                //For Service D
-                                $sql = "SELECT serviceType, rating
-                                      FROM REVIEWS
-                                      WHERE serviceType = 'D'
-                                      ";
-                                $result = mysqli_query($conn, $sql);
-                                if(mysqli_num_rows($result) > 0){
-                                while($row = mysqli_fetch_assoc($result)){
-                                  $datasD[] = $row;
-                                }
-                                }
-                                if(count($datasD) != 0){
-                                foreach($datasD as $row) {
-                                  $sumD += $row["rating"];
-                                }
-                                $avgD = $sumD / count($datasD);
-                                }
-
-                                $html = "<br><br><div style=\"color: black;\">
-                                      <h3 style=\"color: black;\">Service A: " . $avgA . " stars</h3>
-                                      <h3 style=\"color: black;\">Service B: " . $avgB . " stars</h3>
-                                      <h3 style=\"color: black;\">Service C: " . $avgC . " stars</h3>
-                                      <h3 style=\"color: black;\">Service D: " . $avgD . " stars</h3>
-                                </div>";
-                                echo $html;
-
-
-                        /*
-                                echo "<div id=\"container\" style=\"width: 100%; height: 100%\"></div>
-                                  <script>
-                                    anychart.onDocumentReady(function() {
-                                      var data = {
-                                          header: [\"Service Type\", \"Rating\"],
-                                          rows: [
-                                            [\"Service A\", ". $avgA ."],
-                                            [\"Service B\", ". $avgB ."],
-                                            [\"Service C\", ". $avgC ."],
-                                            [\"Service D\", ". $avgD ."]
-                                      ]};
-
-                                      // create the chart
-                                      var chart = anychart.bar();
-
-                                      // add the data
-                                      chart.data(data);
-
-                                      // set the chart title
-                                      chart.title(\"User Ratings\");
-
-                                      // draw
-                                      chart.container(\"container\");
-                                      chart.draw();
-                                    });";
-
-
-                                    echo "
-                                    <div id=\"rate_container\" style=\"width: 100%; height: 100%\"></div>
-                            <script>
-                              anychart.onDocumentReady(function() {
-
-                                var data = {
-                                    header: [\"Name\", \"Death toll\"],
-                                    rows: [
-                                      [\"San-Francisco (1906)\", 1500],
-                                      [\"Messina (1908)\", 87000],
-                                      [\"Ashgabat (1948)\", 175000],
-                                      [\"Chile (1960)\", 10000],
-                                      [\"Tian Shan (1976)\", 242000],
-                                      [\"Armenia (1988)\", 25000],
-                                      [\"Iran (1990)\", 50000]
-                                ]};
-
-                                // create the chart
-                                var chart = anychart.bar();
-
-                                // add the data
-                                chart.data(data);
-
-                                // set the chart title
-                                chart.title(\"The deadliest earthquakes in the XXth century\");
-
-                                // draw
-                                chart.container(\"rate_container\");
-                                chart.draw();
-                              });";
-                                    */              $conn -> close();
-                                         ?>
-
+                $html = "<br><br><div style=\"color: black;\">
+                <h3 style=\"color: black;\">Service A: " . $avgA . " stars</h3>
+                <h3 style=\"color: black;\">Service B: " . $avgB . " stars</h3>
+                <h3 style=\"color: black;\">Service C: " . $avgC . " stars</h3>
+                <h3 style=\"color: black;\">Service D: " . $avgD . " stars</h3>
+                </div>";
+                echo $html;
+                $conn -> close();
+                ?>
 
     </body>
 </html>

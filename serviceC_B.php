@@ -177,17 +177,18 @@ $conn->close();
                                   flowerType VARCHAR(30) NOT NULL,
                                   storeCode VARCHAR(20) NOT NULL,
                                   img VARCHAR(30) NOT NULL,
-                                  price VARCHAR(5) NOT NULL
+                                  price VARCHAR(5) NOT NULL,
+                                  rating FLOAT(6, 2)
                                 )";
 
                               if($conn->query($sql) === TRUE){
 
-                              $sql = "INSERT INTO FLOWER(flowerid, flowerType, storeCode, img, price)
-                              VALUES ('f1', 'Colorful Bouquet', 'a1', 'imgs/flowers.png', '10.00'),
-                                    ('f2', 'White Lilies', 'b2', 'imgs/lilies.png', '13.00'),
-                                    ('f3', 'Assorted Yellows', 'c3', 'imgs/yellowF.png', '13.00'),
-                                    ('f4', 'Flower Crown (Full)', 'd4', 'imgs/crown3.jpg', '15.00'),
-                                    ('f5', 'Flower Crown (Half)', 'e5', 'imgs/crown1.jpg', '7.50')";
+                              $sql = "INSERT INTO FLOWER(flowerid, flowerType, storeCode, img, price, rating)
+                              VALUES ('f1', 'Colorful Bouquet', 'a1', 'imgs/flowers.png', '10.00', 3),
+                                    ('f2', 'White Lilies', 'b2', 'imgs/lilies.png', '13.00', 3),
+                                    ('f3', 'Assorted Yellows', 'c3', 'imgs/yellowF.png', '13.00', 3),
+                                    ('f4', 'Flower Crown (Full)', 'd4', 'imgs/crown3.jpg', '15.00', 3),
+                                    ('f5', 'Flower Crown (Half)', 'e5', 'imgs/crown1.jpg', '7.50', 3)";
                           if ($conn->query($sql) === true) {}
 
                               }
@@ -210,6 +211,7 @@ $conn->close();
                                   <h3>".$row["flowerType"]."</h3>
                                   <img id=\"".$row["flowerid"]."\" src=\"".$row["img"]."\" draggable=\"true\" ondragstart=\"drag(event)\" width=\"100px\">
                                   <p>Price: $".$row["price"]." </p>
+                                  <p>Rate: " . $row["rating"] . " / 5 </p>
                                 </div>";}
                                 echo $html;
                               }

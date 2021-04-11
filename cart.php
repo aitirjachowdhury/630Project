@@ -56,7 +56,7 @@ session_start();
       {
         $iuserid = (int) $_SESSION['userid'];
         $_SESSION['total'] = 0;
-
+        echo $_SESSION['service'];
         if($_SESSION['service'] == "sD"){
           // TO CREATE TABLE
           $sql = "CREATE TABLE ORDERSCL (
@@ -222,7 +222,7 @@ session_start();
               $sql = "SELECT * FROM COFFEE WHERE coffeeid = '$key2'";
 
               $result = $conn->query($sql);
-  
+
               if ($result->num_rows > 0) {
                 $row2 = $result->fetch_assoc();
               $html .= " <tr>
@@ -321,7 +321,7 @@ session_start();
               // TO CREATE TABLE
             $sql = "CREATE TABLE ORDERS(
                 orderid INT PRIMARY KEY AUTO_INCREMENT,
-                userid INT NOT NULL,
+                userid INT,
                 tripid INT,
                 cleanerid INT,
                 productid VARCHAR(4),
@@ -338,15 +338,17 @@ session_start();
             $sql = "SELECT tripid FROM TRIPS WHERE userid = $iuserid";
 
             $result = $conn->query($sql);
-
             if ($result->num_rows > 0) {
               $row = $result->fetch_assoc();
               $itripid = $row["tripid"];
             }
-
+            echo $iuserid;
+            echo $itripid;
             $sql = "INSERT INTO ORDERS (userid, tripid) VALUES ('$iuserid', '$itripid')";
+
             try {
-              if($conn->query($sql) === TRUE){
+              if($conn->query($sql) === TRUE)
+              {
                 $sql = "SELECT orderid FROM ORDERS WHERE userid = $iuserid AND tripid = $itripid";
                 $iorderid;
                 $result = $conn->query($sql);
@@ -359,12 +361,15 @@ session_start();
 
                 $sql = "DELETE FROM TRIPS";
                 if($conn->query($sql) === TRUE){}
-                
-              } else {
+
+              }
+              else {
                 throw new Exception("Something went wrong! Try again later.");
               }
-          } catch (Exception $e) {
+          }
+          catch (Exception $e) {
                 echo "<h2> ERROR: " . $e->getMessage() . "</h2>";
+                echo ("Sorry " .mysqli_errno($conn));
           }
 
           }
@@ -393,7 +398,7 @@ session_start();
 
                 $sql = "DELETE FROM items";
                 if($conn->query($sql) === TRUE){}
-                  
+
               } else {
                 throw new Exception("Something went wrong! Try again later.");
               }
@@ -425,8 +430,8 @@ session_start();
                 echo "<script>alert('Order Successful with Order ID: ".$iorderid."');window.location.href = \"index.php\";</script>" ;
 
                 $sql = "DELETE FROM orderscl";
-                if($conn->query($sql) === TRUE){}    
-                  
+                if($conn->query($sql) === TRUE){}
+
               } else {
                 throw new Exception("Something went wrong! Try again later.");
               }

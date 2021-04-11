@@ -26,7 +26,7 @@ session_start();
 
                  $conn = new mysqli($servername, $username, $pswrd, $dbname);
 
-                 if ($conn->connect_error) {die("Connection failed: " . $conn->connect_error);}  
+                 if ($conn->connect_error) {die("Connection failed: " . $conn->connect_error);}
 
                   $datas = array();
 
@@ -57,7 +57,7 @@ session_start();
 
                             if ($result->num_rows > 0) {
                                 $row2 = $result->fetch_assoc();
-                                $html .= " 
+                                $html .= "
                                 <div class=\"col-3\">
                                 <img src=\"".$row2["img"]."\">
                                 <h3>".$row2["flowerType"]."</h3><br>
@@ -65,6 +65,7 @@ session_start();
                                 <small>Source: ".$row["src"]."</small><br>
                                 <small>Destination: ".$row["dest"]."</small><br>
                                 <small>Distance: ".round($row["dist"],2)." km</small><br>
+                                <small>Rate: " . $row2["rating"] . " / 5 </small><br>
                                 <form id='".$row2["flowerType"]."' method='post'>
                                 <input type='hidden' name='productID' value='".$key2."'>
                                 <button name='submit1' onclick='rmFunction(\"".$row2["flowerType"]."\")'>Remove</button>
@@ -75,10 +76,10 @@ session_start();
                               $sql = "SELECT * FROM COFFEE WHERE coffeeid = '$key2'";
 
                               $result = $conn->query($sql);
-  
+
                               if ($result->num_rows > 0) {
                                   $row2 = $result->fetch_assoc();
-                                  $html .= " 
+                                  $html .= "
                                   <div class=\"col-3\">
                                   <img src=\"".$row2["img"]."\">
                                   <h3>".$row2["coffeeType"]."</h3><br>
@@ -92,8 +93,8 @@ session_start();
                                   </form>
                                   </div>";}
                           }
-                        } 
-                            echo $html; 
+                        }
+                            echo $html;
                         }
                       }
 
@@ -103,7 +104,7 @@ session_start();
       </div>
 
 
-      
+
       <script>
         function rmFunction(x) {
          document.getElementById(x).submit();
