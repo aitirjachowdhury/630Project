@@ -59,7 +59,8 @@
         $sql = "CREATE TABLE users (
               userid int PRIMARY KEY AUTO_INCREMENT,
               username VARCHAR(30) UNIQUE NOT NULL,
-              pswrd VARCHAR(30) NOT NULL,
+              pswrd VARCHAR(50) NOT NULL,
+              salt VARCHAR(50) NOT NULL,
               firstName text NOT NULL,
               lastName text NOT NULL,
               telNo VARCHAR(10) NOT NULL,
@@ -69,8 +70,9 @@
               )";
 
         if($conn->query($sql) === TRUE){}
-
-        $sql = "INSERT INTO users (username, pswrd, firstName, lastName, telNo, mailAddr, email) VALUES ('$uname', '$psw', '$fname', '$lname', '$number', '$address', '$email')";
+        $salt = generateRandomSalt();
+        $psw = md5($psw.$salt);
+        $sql = "INSERT INTO users (username, pswrd, salt, firstName, lastName, telNo, mailAddr, email) VALUES ('$uname', '$psw', '$salt', '$fname', '$lname', '$number', '$address', '$email')";
 
         try {
             if($conn->query($sql) === TRUE){
@@ -83,6 +85,10 @@
         }
       $conn->close();
       }}}}}}}
+    }
+
+    function generateRandomSalt(){
+      return base64_encode(random_bytes(12));
     }
     ?>
 
