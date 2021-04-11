@@ -18,12 +18,6 @@ session_start();
     <div class="topnav">
       <h3>P2S</h3>
       <div class="option">
-    <!--  <a href="index.php">Home</a>
-      <a href="about.html">About Us</a>
-      <a href="contact.html">Contact Us</a>
-      <a href="reviews.php">Reviews</a>
-      <a href="cart.php">Shopping Cart</a>
-      <a class="active" href="signin.php">Sign-in</a> -->
 
       <a href="#!home">Home</a>
       <a href="#!aboutus">About Us</a>
@@ -78,24 +72,41 @@ session_start();
 
                 $uname = strtolower(trim($_POST["uname"]));
                 $psw = trim($_POST["psw"]);
-                $admin = "admin";
+                
+                $servername = "localhost";
+                $username = "root";
+                $pswrd = "";
+                $dbname = "services";
 
+                $conn = new mysqli($servername, $username, $pswrd, $dbname);
 
-                if($uname == "admin" && $psw == "admin" && $_POST['member'] == "admin"){
-                  header("location: db.php");
+                if ($conn->connect_error) {
+                      die("Connection failed: " . $conn->connect_error);
+                }
+
+                if($_POST['member'] == "admin"){
+
+                  $sql = "SELECT salt, pswrd FROM ADM WHERE username = '$uname'";
+
+                  try {
+                    $result = $conn->query($sql);
+
+                    if ($result->num_rows > 0) {
+                      $row = $result->fetch_assoc();
+                      if($row["pswrd"] == md5($psw.$row["salt"])){
+                        header("location: db.php");
+                      }
+                      else{
+                        echo '<script>alert("Incorrect password.")</script>';
+                      }
+                    } else {
+                      echo '<script>alert("Admin not found.")</script>';
+                    }
+                  } catch (Exception $e) {
+                      echo "<h2> ERROR: " . $e->getMessage() . "</h2>";
+                    }
                 }
                 else{
-                  $servername = "localhost";
-                  $username = "root";
-                  $pswrd = "";
-                  $dbname = "services";
-
-                  $conn = new mysqli($servername, $username, $pswrd, $dbname);
-
-                  if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                  }
-
                   $sql = "SELECT userid, salt, pswrd FROM USERS WHERE username = '$uname'";
 
                   try {
@@ -118,10 +129,11 @@ session_start();
                   } catch (Exception $e) {
                       echo "<h2> ERROR: " . $e->getMessage() . "</h2>";
                     }
-                  $conn->close();
               }
+              $conn->close();
+
             }
     ?>
-    <script src="spa.js"></script>
+   <script src="spa.js"></script>
   </body>
 </html>
