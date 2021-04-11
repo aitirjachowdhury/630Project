@@ -25,10 +25,7 @@ session_start();
       </div>
     </div>
 
-    <div class="service1">
-      <button class="service2">Ride to a destination from this source</button>
-      <button class="service2" onclick="window.location.href='serviceB.php';">Ride & Deliver an item from a store</button>
-    </div>
+    <br><br><br>
 
     <div id="myModal" class="modal">
 

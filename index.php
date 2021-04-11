@@ -37,8 +37,8 @@ session_start();
     </div>
 
     <div class="service1">
-      <button class="service2" onclick="window.location.href='serviceA.php';">Ride to a destination from this source</button><br>
-      <button class="service2" onclick="window.location.href='serviceB.php';">Ride & Deliver an item from a store</button>
+      <button class="service2" onclick="window.location.href='serviceA.php';">Ride to a destination from this source</button>
+      <button class="service2" onclick="window.location.href='serviceB.php';">Ride & Deliver an item from a store</button><br>
       <button class="service2" onclick="window.location.href='serviceC.php';">Ride Green</button>
       <button class="service2" onclick="window.location.href='serviceD.php';">Clean Green</button>
     </div>
