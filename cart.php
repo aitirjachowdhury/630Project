@@ -23,11 +23,7 @@ session_start();
       <a href="signin.php">Sign-in</a>
       </div>
     </div>
-
-    <div class="service1">
-      <button class="service2" onclick="window.location.href='serviceA.php';">Ride to a destination from this source</button>
-      <button class="service2" onclick="window.location.href='serviceB.php';">Ride & Deliver an item from a store</button>
-    </div>
+    <br><br><br>
 
     <div class="content small-container">
         <div class="cart">
