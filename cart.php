@@ -12,17 +12,6 @@ session_start();
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
   </head>
   <body>
-    <div class="topnav">
-      <h3>P2S</h3>
-      <div class="option">
-      <a href="index.php">Home</a>
-      <a href="about.html">About Us</a>
-      <a href="contact.html">Contact Us</a>
-      <a href="reviews.php">Reviews</a>
-      <a class="active" href="cart.php">Shopping Cart</a>
-      <a href="signin.php">Sign-in</a>
-      </div>
-    </div>
     <br><br><br>
 
     <div class="content small-container">

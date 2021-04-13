@@ -15,17 +15,6 @@
     </head>
 
     <body>
-    <div class="topnav">
-      <h3>P2S</h3>
-      <div class="option">
-      <a href="index.php">Home</a>
-      <a href="about.html">About Us</a>
-      <a href="contact.html">Contact Us</a>
-      <a class="active" href="reviews.php">Reviews</a>
-      <a href="cart.php">Shopping Cart</a>
-      <a href="signin.php">Sign-in</a>
-      </div>
-    </div>
 
         <br><br>
         <h2 style="text-align: center;">Our customers love us!</h2>

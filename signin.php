@@ -14,21 +14,7 @@ session_start();
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
   </head>
 
-  <body ng-controller="SignInController">
-    <div class="topnav">
-      <h3>P2S</h3>
-      <div class="option">
-
-      <a href="#!home">Home</a>
-      <a href="#!aboutus">About Us</a>
-      <a href="#!contactus">Contact Us</a>
-      <a href="#!reviews">Reviews</a>
-      <a href="#!shoppingcart">Shopping Cart</a>
-      <a class="active" href="#/">Sign-in</a>
-      </div>
-    </div>
-
-    <div ng-view>
+  <body>
     <div class="content">
       <h1 class="title">SIGN IN</h1>
       <div class="underline"></div>
@@ -62,7 +48,6 @@ session_start();
             </div>
           </form>
 
-        </div>
       </div>
     </div>
     </div>
@@ -134,6 +119,5 @@ session_start();
 
             }
     ?>
-   <script src="spa.js"></script>
   </body>
 </html>
