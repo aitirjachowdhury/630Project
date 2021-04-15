@@ -2,29 +2,6 @@
 ob_start();
 session_start();
 ?>
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>P2S</title>
-    <link href="style.css" rel="stylesheet" type="text/css" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-  </head>
-  <body>
-    <div class="topnav">
-      <h3>P2S</h3>
-      <div class="option">
-      <a class="active" href="index.php">Home</a>
-      <a href="about.html">About Us</a>
-      <a href="contact.html">Contact Us</a>
-      <a href="reviews.php">Reviews</a>
-      <a href="cart.php">Shopping Cart</a>
-      <a href="signin.php">Sign-in</a>
-      </div>
-    </div>
 
     <br><br><br>
 
@@ -102,17 +79,18 @@ session_start();
                       coffeeType VARCHAR(30) NOT NULL,
                       storeCode VARCHAR(20) NOT NULL,
                       img VARCHAR(30) NOT NULL,
-                      price VARCHAR(5) NOT NULL
+                      price VARCHAR(5) NOT NULL,
+                      rating FLOAT(6, 2)
                     )";
 
                   if($conn->query($sql) === TRUE){
 
-                  $sql = "INSERT INTO COFFEE(coffeeid, coffeeType, storeCode, img, price)
-                  VALUES ('c1', 'Designed Latte', 'f6', 'imgs/coffee.png', '4.99'),
-                        ('c2', 'Iced Coffee', 'g7', 'imgs/iced.png', '2.99'),
-                        ('c3', 'Black Tea', 'h8', 'imgs/tea.jpg', '2.99'),
-                        ('c4', 'Choco Pastries', 'i9', 'imgs/desert1.png', '5.99'),
-                        ('c5', 'Colorful Macarons', 'j1', 'imgs/desert2.png', '7.99')";
+                  $sql = "INSERT INTO COFFEE(coffeeid, coffeeType, storeCode, img, price, rating)
+                  VALUES ('c1', 'Designed Latte', 'f6', 'imgs/coffee.png', '4.99', 3),
+                        ('c2', 'Iced Coffee', 'g7', 'imgs/iced.png', '2.99', 3),
+                        ('c3', 'Black Tea', 'h8', 'imgs/tea.jpg', '2.99', 3),
+                        ('c4', 'Choco Pastries', 'i9', 'imgs/desert1.png', '5.99', 3),
+                        ('c5', 'Colorful Macarons', 'j1', 'imgs/desert2.png', '7.99', 3)";
               if ($conn->query($sql) === true) {}
 
                   }
@@ -136,6 +114,7 @@ session_start();
                       <h3>".$row["coffeeType"]."</h3>
                       <img id=\"".$row["coffeeid"]."\" src=\"".$row["img"]."\" draggable=\"true\" ondragstart=\"drag(event)\" width=\"100px\">
                       <p>Price: $".$row["price"]." </p>
+                      <p>Rate: " . $row["rating"] . " / 5 </p>
                     </div>";}
                     echo $html;
                   }
@@ -167,7 +146,7 @@ $conn->close();
                               $conn = new mysqli($servername, $username, $pswrd, $dbname);
 
                               if ($conn->connect_error) {die("Connection failed: " . $conn->connect_error);}
-
+/*
                                 $sql = "CREATE TABLE FLOWER(
                                   flowerid VARCHAR(4) PRIMARY KEY NOT NULL,
                                   flowerType VARCHAR(30) NOT NULL,
@@ -176,7 +155,7 @@ $conn->close();
                                   price VARCHAR(5) NOT NULL,
                                   rating FLOAT(6, 2)
                                 )";
-
+*/
                               if($conn->query($sql) === TRUE){
 
                               $sql = "INSERT INTO FLOWER(flowerid, flowerType, storeCode, img, price, rating)

@@ -2,28 +2,6 @@
 ob_start();
 session_start();
 ?>
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>P2S</title>
-    <link href="style.css" rel="stylesheet" type="text/css" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  </head>
-  <body>
-    <div class="topnav">
-      <h3>P2S</h3>
-      <div class="option">
-      <a class="active" href="index.php">Home</a>
-      <a href="about.html">About Us</a>
-      <a href="contact.html">Contact Us</a>
-      <a href="reviews.html">Reviews</a>
-      <a href="cart.php">Shopping Cart</a>
-      <a href="signin.php">Sign-in</a>
-      </div>
-    </div>
 
     <br><br><br>
 
@@ -67,7 +45,7 @@ session_start();
 
 
       <?php
-      
+
       $servername = "localhost";
       $username = "root";
       $pswrd = "";
@@ -129,7 +107,7 @@ session_start();
     </div>
 
     <script>
-  
+
       // Get the modal
       var map;
       var price;

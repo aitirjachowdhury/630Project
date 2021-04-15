@@ -11,7 +11,7 @@
     <div class="topnav">
       <h3>P2S</h3>
       <div class="option">
-      <a href="signin.php">Log Out</a>
+      <a href="#/">Log Out</a>
       </div>
     </div>
 
@@ -960,5 +960,6 @@
 
     </div>
 
+       <script src="spa.js"></script>
   </body>
 </html>

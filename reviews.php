@@ -3,14 +3,8 @@
 <html>
     <head>
        <meta charset="utf-8">
-       <title>Reviews</title>
-        <script src="https://cdn.anychart.com/releases/8.0.0/js/anychart-base.min.js"></script>
-       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+       <title>P2S</title>
        <link href="style.css" rel="stylesheet" type="text/css" />
-       <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
-       <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     </head>
 
@@ -124,15 +118,6 @@
                         <option value="4">4</option>
                         <option value="5">5</option>
                       </select>
-                      <!--
-                      <div class="stars" data-rating="3" name="rating">
-                        <span class="star" value="1"></span>
-                        <span class="star" value="2"></span>
-                        <span class="star" value="3"></span>
-                        <span class="star" value="4"></span>
-                        <span class="star" value="5"></span>
-                      </div>
-                    -->
                       <br>
                       <label for="orderid">Enter OrderID: </label>
                       <input type="text" name="orderid">
@@ -269,6 +254,7 @@
                       }
                   }
                 }
+
                 $sql = "SELECT rating FROM FLOWER WHERE flowerid = '$productid'";
                     $result = mysqli_query($conn, $sql);
                     if(mysqli_num_rows($result) > 0){
@@ -283,14 +269,65 @@
                       $flower += $review_row['rating'];
                       //$avg_flower = $flower / count($flower_datas);
                       $avg_flower = $flower / 2;
+                  $sql1 = "UPDATE FLOWER SET rating='$avg_flower' WHERE flowerid='$productid'";
+                  //echo $sql1;
+                  if ($conn->query($sql1) === true){}
                     }
-                $sql1 = "UPDATE FLOWER SET rating='$avg_flower' WHERE flowerid='$productid'";
-                //echo $sql1;
-                if ($conn->query($sql1) === true){}
 
                 header('Location: reviews.php');
               }
 
+
+/*
+              $sqlCof = "SELECT rating, coffeeid FROM COFFEE";
+                  $result = mysqli_query($conn, $sqlCof);
+                  if(mysqli_num_rows($result) > 0){
+                    while($row = mysqli_fetch_assoc($result)){
+                      $datas[] = $row;
+                    }
+                  }
+              $sqlFlow = "SELECT rating, flowerid FROM FLOWER";
+                  $result = mysqli_query($conn, $sqlFlow);
+                  if(mysqli_num_rows($result) > 0){
+                    while($row = mysqli_fetch_assoc($result)){
+                      $datas[] = $row;
+                    }
+                  }
+
+              if(count($datas) != 0){
+                foreach($datas as $row) {
+                  if($productid == $row["flowerid"])
+                  {
+                    $flower += $row["rating"];
+                  }
+                  else if ($productid == $row["coffeeid"]){
+                    $coffee += $row["coffeeid"];
+                  }
+                }
+                if ($productid == $row["flowerid"]) {
+                  $flower += $review_row['rating'];
+                  $avg_flower = $flower / 2;
+                  $sql1 = "UPDATE FLOWER SET rating='$avg_flower' WHERE flowerid='$productid'";
+                  //echo $sql1;
+                  if ($conn->query($sql1) === true){echo "flower updated!";}
+                }
+                else if ($productid == $row["coffeeid"]) {
+                  $coffee += $review_row['rating'];
+                  $avg_coffee = $coffee / 2;
+                  $sql1 = "UPDATE COFFEE SET rating='$avg_coffee' WHERE coffeeid='$productid'";
+                  //echo $sql1;
+                  if ($conn->query($sql1) === true){}
+                }
+              }
+              //$sql1 = "UPDATE FLOWER SET rating='$avg_flower' WHERE flowerid='$productid'";
+              //echo $sql1;
+              //if ($conn->query($sql1) === true){}
+
+              header('Location: reviews.php');
+            }
+            */
+
+/*
                 //For Service A
                 $sql = "SELECT serviceType, rating
                 FROM REVIEWS
@@ -363,6 +400,8 @@
                 <h3 style=\"color: black;\">Service D: " . $avgD . " stars</h3>
                 </div>";
                 echo $html;
+*/
+
                 $conn -> close();
                 ?>
 

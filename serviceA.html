@@ -1,0 +1,38 @@
+
+      <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="locSelector">
+              <form id="distance_form" action="serviceA.php" method="post">
+                <input type="hidden" name="price" id="price">
+                <input type="hidden" name="distance" id="distance">
+                <input type="hidden" name="carids" id="carids">
+                <input type="hidden" name="cars" id="cartype">
+                <div class="address">
+                  <p>Source: </p>
+                  <input type="text" style="width: 90%;" id="srcaddr" name="srcaddr" placeholder="Enter Address" required>
+                </div>
+
+                <div class="address">
+                  <p>Destination: </p>
+                  <input type="text" style="width: 90%;" id="destaddr" name="destaddr" placeholder="Enter Address" required>
+                </div>
+
+                <div style="width: 10%;padding-left: 20px; padding-top: 25px; float:left">
+                  <button type="submit" style = "width: 100%; padding: 7px;" id="set">Set</button>
+                </div>
+
+                  <div id="map"></div>
+
+                  <p>Pick-up Time:</p>
+                  <input type="time" style="margin-bottom: 10px;" name="time" required>
+                  <br>
+
+                  <button type="submit" style="margin-bottom: 20px;" name="order">Order</button>
+                </form>
+
+              </div>
+            </div>
+          </div>
+
+              <script src"map.js"></script>

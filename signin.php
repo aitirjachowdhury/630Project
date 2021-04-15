@@ -57,7 +57,7 @@ session_start();
 
                 $uname = strtolower(trim($_POST["uname"]));
                 $psw = trim($_POST["psw"]);
-                
+
                 $servername = "localhost";
                 $username = "root";
                 $pswrd = "";
@@ -103,7 +103,7 @@ session_start();
                         $_SESSION['loggedin'] = true;
                         $_SESSION['userid'] = $row["userid"];
                         $_SESSION['service'] = "";
-                        header("location: index.php");
+                        header("location: main.php#!/home");
                       }
                       else{
                         echo '<script>alert("Incorrect password.")</script>';

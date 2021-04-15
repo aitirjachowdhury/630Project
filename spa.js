@@ -12,6 +12,18 @@ app.config(function ($routeProvider) {
         .when('/home', {
             templateUrl: 'index.php',
             controller: 'HomeController'})
+        .when('/home/serviceA', {
+            templateUrl: 'serviceA.html',
+            controller: 'ServiceController'})
+        .when('/home/serviceB', {
+            templateUrl: 'serviceB.php',
+            controller: 'ServiceController'})
+        .when('/home/serviceC', {
+            templateUrl: 'serviceC.php',
+            controller: 'ServiceController'})
+        .when('/home/serviceD', {
+            templateUrl: 'serviceD.php',
+            controller: 'ServiceController'})
         .when('/aboutus', {
             templateUrl: 'about.html',
             controller: 'AboutusController'})
@@ -30,6 +42,9 @@ app.config(function ($routeProvider) {
 app.controller('SignInController');
 app.controller('SignUpController');
 app.controller('HomeController');
+app.controller('ServiceController', function($scope){
+  $scope.message = "it works!";
+});
 app.controller('AboutusController');
 app.controller('ContactusController');
 app.controller('ReviewsController');
