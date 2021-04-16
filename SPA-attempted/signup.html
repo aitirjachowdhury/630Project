@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>P2S</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+  </head>
+  <body ng-controller="SignUpController">
+    <div class="content">
+      <h1 class="title">SIGN UP</h1>
+      <div class="underline"></div>
+      <p style="margin-top: 15px;">Enter all details to create your profile</p>
+        <div class="smaller-container">
+          <form>
+            <div class="si-container">
+            <label>Username</label>
+            <input type="text" name="username" ng-model="username" placeholder="Enter username here">
+
+            <label>Password</label>
+            <input type="password" name="password" ng-model="password">
+
+            <label>First Name</label>
+            <input type="text" name="fname" ng-model="fname" placeholder="Johnny">
+
+            <label>Surname</label>
+            <input type="text" name="lname" ng-model="lname" placeholder="Appleseed">
+
+            <label>Tel. No</label>
+            <input type="text" name="number" ng-model="number" placeholder="123-456-7890">
+
+            <label>Mailing Address</label>
+            <input type="text" name="address" ng-model="address" placeholder="123 Worm St.">
+
+            <label>Email Address</label>
+            <input type="text" name="email" ng-model="email" placeholder="johnny.appleseed@gmail.com"><br><br>
+
+            <input type="submit" class="account" ng-click="insertUser()" value="Create an Account">
+
+            <br><br>
+            <label>Already have an account?
+                <a href="#/">Sign In</a>
+            </label>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
